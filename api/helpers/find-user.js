@@ -7,7 +7,8 @@ module.exports = {
 			type: 'string'
 		},
 		username: {
-			type: 'string'
+			type: 'string',
+			defaultsTo: ""
 		},
 		email: {
 			type: 'string',
@@ -38,16 +39,7 @@ module.exports = {
 			usersArray.push(data)
 		});
 
-		// 	.then((querySnapshot) => {
-		// 		querySnapshot.forEach((doc) => {
-		// 		let data = doc.data();
-		// 			data.docId = doc.id;
-		// 			usersArray.push(data);
-		// 		});
-		// })
-		// .catch((error) => {
-		// 	return exits.invalid(error);
-		// });
+		 
 		}
 		else{
 

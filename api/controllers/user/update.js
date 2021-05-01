@@ -48,7 +48,8 @@ module.exports = {
         if (_.isArray(user))
             user = _.last(user);
         
-          console.log("user",user);
+        console.log("user", user);
+        
         //check the user to ensure the unique for email and password
         let attr = {};
         if (inputs.email !== user.email)
@@ -56,12 +57,11 @@ module.exports = {
         
         if (inputs.username !== user.username)
             attr.username = inputs.username.toLowerCase();
-        
+         console.log("check the new user unique",attr);
         if (!_.isEmpty(attr)) { 
         let _user = await sails.helpers.findUser.with(attr);
 
-        console.log("check the new user unique",_user,attr);
-        
+       
         if (_user.length != 0)
             return this.res.errorResponse(sails.config.custom.responseCodes.badRequest, sails.__('email_found'), {
                 "message": sails.__('email_found'),
@@ -71,27 +71,27 @@ module.exports = {
             })
         }
         
-       
-        
+        //init the firestore
         var db = sails.config.globals.firebase.firestore();
         
 		const usersRef = db.collection('users');
 		
 
+        //update the user new data 
         var updateUser = usersRef.doc(user.docId).set({
             email: inputs.email.toLowerCase(),
             username: inputs.username.toLowerCase(),
 			age: inputs.age,
         }, { merge: true }).then(() => {
-            console.log("Document successfully written!");
+            
               return this.res.successResponse(sails.config.custom.responseCodes.success
             , sails.__('mission_success'))		
         })
         .catch((error) => {
           return this.res.errorResponse(sails.config.custom.responseCodes.serverError,
-                sails.__('server_error'))
+              sails.__('server_error'), {error})
         });		 
 		 
-        console.log(updateUser)
+        
 	}
 }
