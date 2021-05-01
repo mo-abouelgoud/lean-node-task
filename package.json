@@ -8,6 +8,7 @@
     "@sailshq/connect-redis": "^3.2.1",
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
+    "bcryptjs": "^2.4.3",
     "firebase-admin": "^9.7.0",
     "grunt": "1.0.4",
     "joi": "^17.4.0",
@@ -26,7 +27,7 @@
     "test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
     "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
-    "dev": "export NODE_ENV=development && nodemon --ignore --fast 'tmp/*' app.js --port=1338 && exit 0"
+    "dev": "export NODE_ENV=development && nodemon --ignore --fast 'tmp/*' app.js --port=1339 && exit 0"
   },
   "main": "app.js",
   "repository": {
