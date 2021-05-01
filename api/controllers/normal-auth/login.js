@@ -52,7 +52,7 @@ module.exports = {
 				, sails.__('invalid_cred'))
 		 }
 
-  		var token = jwt.sign({user: user.id}, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
+  		var token = jwt.sign({user: user}, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
  		 
          return this.res.successResponse(sails.config.custom.responseCodes.success
             , sails.__('mission_success'), { token ,userType:sails.config.custom.userRoles.normalUser})			 
