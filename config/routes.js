@@ -21,7 +21,8 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
-    'post /api/users/register': { controller: "normal-auth", action: "register", validation: "register" },
+  'post /api/users/register': { controller: "normal-auth", action: "register", validation: "register" },
+  'patch /api/users/login': { controller: "normal-auth", action: "login", validation: "login" },
 
 
   /***************************************************************************
