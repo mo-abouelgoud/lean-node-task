@@ -41,12 +41,16 @@ module.exports = {
 
 		const byEmailArray = [];
 		byUsernameQuerySnapshot.forEach((doc) => {
-			byEmailArray.push(doc.data())
+			let data = doc.data();
+			data.docId = doc.id;
+			byEmailArray.push(data)
 		});
 		
 		const byUsernameArray = [];
 		byEmailQuerySnapshot.forEach((doc) => {
-			byUsernameArray.push(doc.data())
+			let data = doc.data();
+			data.docId = doc.id;
+			byUsernameArray.push(data)
         });;
 
         const usersArray = byEmailArray.concat(byUsernameArray);

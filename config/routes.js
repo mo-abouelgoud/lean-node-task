@@ -25,6 +25,7 @@ module.exports.routes = {
   'patch /api/users/login': { controller: "normal-auth", action: "login", validation: "login" },
 
   'get /api/users/show': { controller: "user", action: "details"},
+  'put /api/users/update': { controller: "user", action: "update", validation: "updateUser" },
 
 
   /***************************************************************************

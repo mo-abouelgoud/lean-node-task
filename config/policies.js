@@ -18,7 +18,8 @@ module.exports.policies = {
 	},
 	
     user: {
-    	details:  'isAuthenticated',
+        details: 'isAuthenticated',
+        update: ['isAuthenticated','inputValidation']
     }
 
 };
