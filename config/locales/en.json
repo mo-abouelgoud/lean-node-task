@@ -1,4 +1,12 @@
 {
   "Welcome": "Welcome",
-  "A brand new app.": "A brand new app."
+  "A brand new app.": "A brand new app.",
+  "invalid_cred": "Doesn't look like an valid credentials.",
+  "validation_error":"input data is invalid",
+  "notAuthenticate":"you are not Authenticate to pass",
+  "email_found":"email address and/or username is already registerd",
+  "mission_success":"the process has finished successfully",
+  "database_error":"there was aproblem occured",
+  "server_error":"the server returned error",
+  "user_not_found":"user not Found"
 }
