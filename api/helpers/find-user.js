@@ -3,6 +3,9 @@ module.exports = {
 	description: 'find a user details',
 
 	inputs: {
+		id: {
+			type: 'string'
+		},
 		username: {
 			type: 'string'
 		},
@@ -20,13 +23,33 @@ module.exports = {
 	},
 
     fn: async function (inputs, exits) {
-        
+		let usersArray=[];
         var db = sails.config.globals.firebase.firestore();
         
 		const usersRef = db.collection('users');
 		
-		console.log("email", inputs.email);
-		console.log("username", inputs.username);
+		if (inputs.id) {
+			const byIdQuerySnapshot = await usersRef.where('id', '==', inputs.id).get();
+
+			 
+		byIdQuerySnapshot.forEach((doc) => {
+			let data = doc.data();
+			data.docId = doc.id;
+			usersArray.push(data)
+		});
+
+		// 	.then((querySnapshot) => {
+		// 		querySnapshot.forEach((doc) => {
+		// 		let data = doc.data();
+		// 			data.docId = doc.id;
+		// 			usersArray.push(data);
+		// 		});
+		// })
+		// .catch((error) => {
+		// 	return exits.invalid(error);
+		// });
+		}
+		else{
 
     
         const byUsername = usersRef.where('username', '==', inputs.username).get();
@@ -53,7 +76,8 @@ module.exports = {
 			byUsernameArray.push(data)
         });;
 
-        const usersArray = byEmailArray.concat(byUsernameArray);
+		 usersArray = byEmailArray.concat(byUsernameArray);
+		}
         
         return exits.success(usersArray);
  

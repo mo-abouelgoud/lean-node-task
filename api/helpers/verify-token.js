@@ -37,8 +37,9 @@ module.exports = {
 				if (err || !payload.user) return exits.invalid( sails.__('notAuthenticate'))
 				 
 				var user = await sails.helpers.findUser.with({
-         		   username: payload.user.username.toLowerCase()
-				 });
+         		   id: payload.user.id
+				});
+					console.log(user,payload.user.id);
 				if (user.length == 0) return exits.invalid( sails.__('notAuthenticate'))
 				user = _.last(user);
 			 
