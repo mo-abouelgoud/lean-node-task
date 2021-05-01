@@ -33,9 +33,7 @@ module.exports = {
 
     fn: async function (inputs, exits) {
         console.log("inputs.username",inputs.username);
-		// 	var user = await User.findOne({
-		// 	username: inputs.username
-		// })
+	 
 		 let user = await sails.helpers.findUser.with({
             username: inputs.username.toLowerCase()
 		 });
@@ -44,7 +42,8 @@ module.exports = {
 			return this.res.errorResponse(sails.config.custom.responseCodes.notFound,
 				sails.__('user_not_found'))
 		
-		user = _.last(user);
+		if(_.isArray(user))
+            user = _.last(user);
 
 		var passwordIsValid = await bcrypt.compare(inputs.password, user.password)
 		if (!passwordIsValid) {

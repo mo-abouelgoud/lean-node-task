@@ -21,5 +21,5 @@ module.exports = {
   //   connection: 'someMongodbServer'
   // }
   jwtSecret: 'secret|Jwt|prefered|token@#2@',
-  jwtExpires: 5
+  jwtExpires: 60 * 60 * 2
 };

@@ -10,8 +10,15 @@
 
 module.exports.policies = {
 
- '*': ['setLocale','firebase-init'],
+    '*': ['setLocale', 'firebase-init'],
+    
+    "normal-auth": {
+		login:  'inputValidation',
+		register:  'inputValidation',
+	},
 	
-
+    user: {
+    	details:  'isAuthenticated',
+    }
 
 };

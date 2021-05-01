@@ -32,7 +32,8 @@ module.exports = {
 			 
 			if (!token) return exits.invalid( sails.__('notAuthenticate'))
 		 
-			return jwt.verify(token, sails.config.jwtSecret, async function(err, payload) {
+				return jwt.verify(token, sails.config.jwtSecret, async function (err, payload) {
+				 
 				if (err || !payload.user) return exits.invalid( sails.__('notAuthenticate'))
 				 
 				var user = await sails.helpers.findUser.with({
