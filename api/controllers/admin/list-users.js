@@ -66,15 +66,22 @@ module.exports = {
 		
 		console.log("filters",filters)
 		
+
 		index.search('', {
 			page: inputs.page,
 			hitsPerPage: inputs.limit,
-			 filters: filters
-			}).then(({ hits }) => {
-			// console.log("results",hits);
+			filters: filters,
+			responseFields: [
+				'hits',
+				'hitsPerPage',
+				'nbPages',
+				'page'
+			]
+			}).then((results) => {
+		
 			 
 			return this.res.successResponse(sails.config.custom.responseCodes.success
-				, sails.__('mission_success'), hits);
+				, sails.__('mission_success'), results);
 			
 		}).catch((error) => {
 			return this.res.errorResponse(sails.config.custom.responseCodes.serverError,

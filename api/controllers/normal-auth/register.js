@@ -101,7 +101,12 @@ module.exports = {
             var token = jwt.sign({user: attr, userType: sails.config.custom.userRoles.normalUser }, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
 			
             //insert the user data to algolia index
-             const { objectID } = await algoliaAddIndex(attr);
+            const { objectID } = await algoliaAddIndex(attr);
+            
+            //clear unused attributes
+             attr= _.omit(attr, [
+	    		'password','objectID'
+	    	])
 
             return this.res.successResponse(sails.config.custom.responseCodes.success,
                 sails.__('mission_success'),
