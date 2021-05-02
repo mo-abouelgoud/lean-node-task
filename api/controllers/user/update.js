@@ -62,7 +62,7 @@ module.exports = {
         if (_.isArray(user))
             user = _.last(user);
         
-        console.log("user", user);
+        
         
         //check the user to ensure the unique for email and password
         let attr = {};

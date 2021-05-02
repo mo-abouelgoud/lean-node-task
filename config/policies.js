@@ -24,7 +24,7 @@ module.exports.policies = {
 
     admin:{
         login: 'inputValidation',
-        "list-users":['isAuthenticated','isAdmin']
+        "list-users":['inputValidation','isAuthenticated','isAdmin']
     }
 
 };
