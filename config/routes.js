@@ -27,6 +27,10 @@ module.exports.routes = {
   'get /api/users/show': { controller: "user", action: "details"},
   'put /api/users/update': { controller: "user", action: "update", validation: "updateUser" },
 
+  'patch /api/admin/login': { controller: "admin", action: "login", validation: "login" },
+  'get /api/admin/list-users': { controller: "admin", action: "list-users" },
+
+
 
   /***************************************************************************
   *                                                                          *

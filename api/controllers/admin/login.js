@@ -34,27 +34,27 @@ module.exports = {
     fn: async function (inputs, exits) {
         console.log("inputs.username",inputs.username);
 	 
-		 let user = await sails.helpers.findUser.with({
+		 let admin = await sails.helpers.findadmin.with({
             username: inputs.username.toLowerCase()
 		 });
 		
-		if (user.length == 0)
+		if (admin.length == 0)
 			return this.res.errorResponse(sails.config.custom.responseCodes.notFound,
 				sails.__('user_not_found'))
 		
-		if(_.isArray(user))
-            user = _.last(user);
+		if(_.isArray(admin))
+            admin = _.last(admin);
 
-		var passwordIsValid = await bcrypt.compare(inputs.password, user.password)
+		var passwordIsValid = await bcrypt.compare(inputs.password, admin.password)
 		if (!passwordIsValid) {
 			return this.res.errorResponse(sails.config.custom.responseCodes.badRequest
 				, sails.__('invalid_cred'))
 		 }
 
-  		var token = jwt.sign({user: user,userType:sails.config.custom.userRoles.normalUser}, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
+  		var token = jwt.sign({user: user,userType:sails.config.custom.userRoles.adminUser}, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
  		 
          return this.res.successResponse(sails.config.custom.responseCodes.success
-            , sails.__('mission_success'), { token ,userType:sails.config.custom.userRoles.normalUser})			 
+            , sails.__('mission_success'), { token ,userType:sails.config.custom.userRoles.adminUser})			 
 		 
 	}
 }

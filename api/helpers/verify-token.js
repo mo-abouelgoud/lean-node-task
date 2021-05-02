@@ -34,7 +34,7 @@ module.exports = {
 		 
 				return jwt.verify(token, sails.config.jwtSecret, async function (err, payload) {
 				 
-				if (err || !payload.user) return exits.invalid( sails.__('notAuthenticate'))
+					if (err || !payload.user) return exits.invalid( sails.__('notAuthenticate'))
 				 
 				var user = await sails.helpers.findUser.with({
          		   id: payload.user.id
@@ -43,7 +43,9 @@ module.exports = {
 				if (user.length == 0) return exits.invalid( sails.__('notAuthenticate'))
 				user = _.last(user);
 			 
-				req.user = user
+					req.user = user
+					req.role = payload.userType
+					
 				return exits.success(user)
 			})
 		}

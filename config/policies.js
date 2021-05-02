@@ -20,6 +20,11 @@ module.exports.policies = {
     user: {
         details: 'isAuthenticated',
         update: ['isAuthenticated','inputValidation']
+    },
+
+    admin:{
+        login: 'inputValidation',
+        "list-users":['inputValidation','isAuthenticated','isAdmin']
     }
 
 };
