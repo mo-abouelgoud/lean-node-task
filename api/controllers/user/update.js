@@ -6,6 +6,8 @@ const algoliaUpdateIndex = (object,objectId) => {
 
     object.objectID = objectId;
 
+    console.log(object,objectId)
+
    return index.partialUpdateObject(object);
     
 
@@ -69,7 +71,7 @@ module.exports = {
         
         if (inputs.username !== user.username)
             attr.username = inputs.username.toLowerCase();
-         console.log("check the new user unique",attr);
+         
         if (!_.isEmpty(attr)) { 
         let _user = await sails.helpers.findUser.with(attr);
 
@@ -97,7 +99,7 @@ module.exports = {
         //update the user new data 
         var updateUser = usersRef.doc(user.docId).set(_object, { merge: true }).then(async () => {
             
-            const { objectID } = await algoliaUpdateIndex(_object);
+            const { objectID } = await algoliaUpdateIndex(_object,user.id);
             
               return this.res.successResponse(sails.config.custom.responseCodes.success
             , sails.__('mission_success'))		
