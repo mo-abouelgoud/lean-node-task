@@ -18,8 +18,8 @@ module.exports.policies = {
 	},
 	
     user: {
-        details: 'isAuthenticated',
-        update: ['isAuthenticated','inputValidation']
+        details: ['isAuthenticated','isNormalUser'],
+        update: ['isAuthenticated','inputValidation','isNormalUser']
     },
 
     admin:{
