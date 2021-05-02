@@ -1,5 +1,25 @@
 var jwt = require('jsonwebtoken')
 
+
+const getUser = async (payload) => {
+	var user = await sails.helpers.findUser.with({
+		id: payload.user.id
+	});
+					 
+			 
+	return user;
+};
+
+const getAdmin = async (payload) => {
+	var admin = await sails.helpers.findAdmin.with({
+		id: payload.user.id
+	});
+ 
+					 			 
+	return admin;
+			
+};
+
 module.exports = {
 	friendlyName: 'Verify JWT',
 	description: 'Verify a JWT token.',
@@ -22,34 +42,46 @@ module.exports = {
 			 
 		}
 	},
-	fn: function(inputs, exits) {
+	fn: function (inputs, exits) {
 		var req = inputs.req
 		var res = inputs.res
 	 
- 		if (req.header('authorization')) {
+		if (req.header('authorization')) {
 		 
 			var token = req.header('authorization').split('Bearer ')[1]
 			 
-			if (!token) return exits.invalid( sails.__('notAuthenticate'))
+			if (!token) return exits.invalid(sails.__('notAuthenticate') + "1")
 		 
-				return jwt.verify(token, sails.config.jwtSecret, async function (err, payload) {
+			return jwt.verify(token, sails.config.jwtSecret, async function (err, payload) {
 				 
-					if (err || !payload.user) return exits.invalid( sails.__('notAuthenticate'))
-				 
-				var user = await sails.helpers.findUser.with({
-         		   id: payload.user.id
-				});
-					console.log(user,payload.user.id);
-				if (user.length == 0) return exits.invalid( sails.__('notAuthenticate'))
-				user = _.last(user);
-			 
-					req.user = user
-					req.role = payload.userType
+				if (err || !payload.user) return exits.invalid(sails.__('notAuthenticate') + "12")
+				
+				let user = {};
+
+				if (payload.userType === sails.config.custom.userRoles.adminUser)
+					user=await getAdmin(payload);
 					
+				else if (payload.userType === sails.config.custom.userRoles.normalUser)
+					user = await getUser(payload);
+				
+				
+				if (user.length == 0) return exits.invalid(sails.__('notAuthenticate'))
+
+				if(_.isArray(user))
+          	 		 user = _.last(user);
+				
+				req.user = user
+				req.role = payload.userType
+				
 				return exits.success(user)
 			})
 		}
- 
-		return exits.invalid( sails.__('notAuthenticate'))
+		
+		 
+		return exits.invalid( sails.__('notAuthenticate')+"14")
 	}
+
+
+	
+
 }

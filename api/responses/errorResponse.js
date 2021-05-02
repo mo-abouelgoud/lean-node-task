@@ -21,6 +21,6 @@ module.exports = function(status,message,data) {
         result.data = _.isString(data) ? {data} : data;
   }
     
-    return res.json(result);
+    return res.status(statusCode).json(result);
 
 }

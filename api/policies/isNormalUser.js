@@ -3,7 +3,7 @@ module.exports = function (req, res, next) {
     
     console.log("my role is",req.role);
    
-    if (req.role == sails.config.custom.userRoles.adminUser)
+    if (req.role == sails.config.custom.userRoles.normalUser)
         
         return next();
     else

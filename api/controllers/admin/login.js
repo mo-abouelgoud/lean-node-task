@@ -34,7 +34,7 @@ module.exports = {
     fn: async function (inputs, exits) {
         console.log("inputs.username",inputs.username);
 	 
-		 let admin = await sails.helpers.findadmin.with({
+		 let admin = await sails.helpers.findAdmin.with({
             username: inputs.username.toLowerCase()
 		 });
 		
@@ -51,7 +51,7 @@ module.exports = {
 				, sails.__('invalid_cred'))
 		 }
 
-  		var token = jwt.sign({user: user,userType:sails.config.custom.userRoles.adminUser}, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
+  		var token = jwt.sign({user: admin,userType:sails.config.custom.userRoles.adminUser}, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
  		 
          return this.res.successResponse(sails.config.custom.responseCodes.success
             , sails.__('mission_success'), { token ,userType:sails.config.custom.userRoles.adminUser})			 
