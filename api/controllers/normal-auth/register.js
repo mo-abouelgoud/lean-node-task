@@ -1,6 +1,19 @@
 var bcrypt = require('bcryptjs')
 var jwt = require('jsonwebtoken')
 
+var algoliasearch = require("algoliasearch");
+
+
+const algoliaAddIndex = (object) => {
+     const client = algoliasearch(sails.config.algolia_config.api_id , sails.config.algolia_config.admin_api_key);
+    const index = client.initIndex(sails.config.algolia_config.index_name);
+
+    object.objectID = object.id;
+    return index.saveObject(object);
+
+      
+}
+
 module.exports = {
 	friendlyName: 'Create user',
 	description: 'Create a new user.',
@@ -63,7 +76,19 @@ module.exports = {
 			age: inputs.age,
 		 
 			 
-		}
+        }
+
+        // try {
+           
+        // } catch (err) {
+        //     console.log("the error ", err);
+        //     return this.res.errorResponse(sails.config.custom.responseCodes.serverError,
+        //             sails.__('database_error'),
+        //             { error: err });
+        // }
+        
+         
+       
 	 
         attr.password = await bcrypt.hash(inputs.password, 10);
 	
@@ -72,9 +97,12 @@ module.exports = {
         db.collection("users").add(
            attr
         )
-        .then((docRef) => {
-            var token = jwt.sign({user: attr}, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
-					
+        .then( async (docRef) => {
+            var token = jwt.sign({user: attr, userType: sails.config.custom.userRoles.normalUser }, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
+			
+            //insert the user data to algolia index
+             const { objectID } = await algoliaAddIndex(attr);
+
             return this.res.successResponse(sails.config.custom.responseCodes.success,
                 sails.__('mission_success'),
                 { token: token, user: attr, userType: sails.config.custom.userRoles.normalUser }

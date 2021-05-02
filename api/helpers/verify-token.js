@@ -72,6 +72,8 @@ module.exports = {
 				
 				req.user = user
 				req.role = payload.userType
+
+				console.log("verify token_ the user token",user,payload);
 				
 				return exits.success(user)
 			})

@@ -1,4 +1,16 @@
+var algoliasearch = require("algoliasearch");
 
+const algoliaUpdateIndex = (object,objectId) => {
+     const client = algoliasearch(sails.config.algolia_config.api_id , sails.config.algolia_config.admin_api_key);
+    const index = client.initIndex(sails.config.algolia_config.index_name);
+
+    object.objectID = objectId;
+
+   return index.partialUpdateObject(object);
+    
+
+      
+}
 
 
 module.exports = {
@@ -76,13 +88,16 @@ module.exports = {
         
 		const usersRef = db.collection('users');
 		
-
-        //update the user new data 
-        var updateUser = usersRef.doc(user.docId).set({
+        let _object = {
             email: inputs.email.toLowerCase(),
             username: inputs.username.toLowerCase(),
-			age: inputs.age,
-        }, { merge: true }).then(() => {
+            age: inputs.age,
+        };
+
+        //update the user new data 
+        var updateUser = usersRef.doc(user.docId).set(_object, { merge: true }).then(async () => {
+            
+            const { objectID } = await algoliaUpdateIndex(_object);
             
               return this.res.successResponse(sails.config.custom.responseCodes.success
             , sails.__('mission_success'))		
