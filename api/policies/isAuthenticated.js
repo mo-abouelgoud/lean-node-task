@@ -12,7 +12,7 @@ module.exports = async function (req, res, next) {
       },
       invalid: function (err) {
         return res.errorResponse(
-          sails.config.custom.responseCodes.notAuthenticate,
+          sails.config.globals.responseCodes.notAuthenticate,
           sails.__("notAuthenticate"),
           { error: err }
         );

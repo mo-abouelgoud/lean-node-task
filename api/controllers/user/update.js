@@ -54,7 +54,7 @@ module.exports = {
 
     if (!user)
       return this.res.errorResponse(
-        sails.config.custom.responseCodes.notFound,
+        sails.config.globals.responseCodes.notFound,
         sails.__("user_not_found")
       );
 
@@ -72,7 +72,7 @@ module.exports = {
 
       if (_user.length != 0)
         return this.res.errorResponse(
-          sails.config.custom.responseCodes.badRequest,
+          sails.config.globals.responseCodes.badRequest,
           sails.__("email_found"),
           {
             message: sails.__("email_found"),
@@ -100,13 +100,13 @@ module.exports = {
         const { objectID } = await algoliaUpdateIndex(_object, user.id);
 
         return this.res.successResponse(
-          sails.config.custom.responseCodes.success,
+          sails.config.globals.responseCodes.success,
           sails.__("mission_success")
         );
       })
       .catch((error) => {
         return this.res.errorResponse(
-          sails.config.custom.responseCodes.serverError,
+          sails.config.globals.responseCodes.serverError,
           sails.__("server_error"),
           { error }
         );

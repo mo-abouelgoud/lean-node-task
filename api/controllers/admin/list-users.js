@@ -38,20 +38,6 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    //  let user = this.req.user
-
-    // if (!user)
-    // 	return this.res.errorResponse(sails.config.custom.responseCodes.notFound,
-    //         sails.__('user_not_found'))
-
-    // if(_.isArray(user))
-    //     user = _.last(user);
-
-    // //delete the password and id from the user obj
-    // user= _.omit(user, [
-    // 		'password','id'
-    // 	])
-
     const client = algoliasearch(
       sails.config.algolia_config.api_id,
       sails.config.algolia_config.admin_api_key
@@ -63,8 +49,6 @@ module.exports = {
     if (inputs.email)
       filters = filters + (filters ? " OR " : "") + `email:${inputs.email}`;
 
-    console.log("filters", filters);
-
     index
       .search("", {
         page: inputs.page,
@@ -74,14 +58,14 @@ module.exports = {
       })
       .then((results) => {
         return this.res.successResponse(
-          sails.config.custom.responseCodes.success,
+          sails.config.globals.responseCodes.success,
           sails.__("mission_success"),
           results
         );
       })
       .catch((error) => {
         return this.res.errorResponse(
-          sails.config.custom.responseCodes.serverError,
+          sails.config.globals.responseCodes.serverError,
           sails.__("server_error"),
           { error: error }
         );

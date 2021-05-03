@@ -37,7 +37,7 @@ module.exports = {
 
     if (user.length == 0)
       return this.res.errorResponse(
-        sails.config.custom.responseCodes.notFound,
+        sails.config.globals.responseCodes.notFound,
         sails.__("user_not_found")
       );
 
@@ -46,21 +46,21 @@ module.exports = {
     var passwordIsValid = await bcrypt.compare(inputs.password, user.password);
     if (!passwordIsValid) {
       return this.res.errorResponse(
-        sails.config.custom.responseCodes.badRequest,
+        sails.config.globals.responseCodes.badRequest,
         sails.__("invalid_cred")
       );
     }
 
     var token = jwt.sign(
-      { user: user, userType: sails.config.custom.userRoles.normalUser },
+      { user: user, userType: sails.config.globals.userRoles.normalUser },
       sails.config.jwtSecret,
       { expiresIn: sails.config.jwtExpires }
     );
 
     return this.res.successResponse(
-      sails.config.custom.responseCodes.success,
+      sails.config.globals.responseCodes.success,
       sails.__("mission_success"),
-      { token, userType: sails.config.custom.userRoles.normalUser }
+      { token, userType: sails.config.globals.userRoles.normalUser }
     );
   },
 };

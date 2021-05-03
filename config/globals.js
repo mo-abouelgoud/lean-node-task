@@ -22,6 +22,22 @@ module.exports.globals = {
   async: require("async"),
   firebase: require("firebase-admin"),
 
+  responseCodes: {
+    badRequest: 400,
+    serverError: 500,
+    forbidden: 403,
+    notFound: 404,
+    validationError: 422,
+    notAuthenticate: 401,
+    success: 200,
+    create: 201,
+  },
+  userRoles: {
+    normalUser: "NORMAL_USER",
+    adminUser: "ADMIN_USER",
+    guestUser: "GUEST_USER",
+  },
+
   /****************************************************************************
    *                                                                           *
    * This app was generated without a dependency on the "async" NPM package.   *

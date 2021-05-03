@@ -60,7 +60,7 @@ module.exports = {
 
     if (user.length != 0)
       return this.res.errorResponse(
-        sails.config.custom.responseCodes.badRequest,
+        sails.config.globals.responseCodes.badRequest,
         sails.__("email_found"),
         {
           message: sails.__("email_found"),
@@ -75,15 +75,6 @@ module.exports = {
       age: inputs.age,
     };
 
-    // try {
-
-    // } catch (err) {
-    //     console.log("the error ", err);
-    //     return this.res.errorResponse(sails.config.custom.responseCodes.serverError,
-    //             sails.__('database_error'),
-    //             { error: err });
-    // }
-
     attr.password = await bcrypt.hash(inputs.password, 10);
 
     var db = sails.config.globals.firebase.firestore();
@@ -92,7 +83,7 @@ module.exports = {
       .add(attr)
       .then(async (docRef) => {
         var token = jwt.sign(
-          { user: attr, userType: sails.config.custom.userRoles.normalUser },
+          { user: attr, userType: sails.config.globals.userRoles.normalUser },
           sails.config.jwtSecret,
           { expiresIn: sails.config.jwtExpires }
         );
@@ -104,18 +95,18 @@ module.exports = {
         attr = _.omit(attr, ["password", "objectID"]);
 
         return this.res.successResponse(
-          sails.config.custom.responseCodes.success,
+          sails.config.globals.responseCodes.success,
           sails.__("mission_success"),
           {
             token: token,
             user: attr,
-            userType: sails.config.custom.userRoles.normalUser,
+            userType: sails.config.globals.userRoles.normalUser,
           }
         );
       })
       .catch((error) => {
         return this.res.errorResponse(
-          sails.config.custom.responseCodes.serverError,
+          sails.config.globals.responseCodes.serverError,
           sails.__("database_error"),
           { error: error }
         );

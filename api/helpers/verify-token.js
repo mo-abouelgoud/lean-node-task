@@ -54,10 +54,10 @@ module.exports = {
 
           let user = {};
 
-          if (payload.userType === sails.config.custom.userRoles.adminUser)
+          if (payload.userType === sails.config.globals.userRoles.adminUser)
             user = await getAdmin(payload);
           else if (
-            payload.userType === sails.config.custom.userRoles.normalUser
+            payload.userType === sails.config.globals.userRoles.normalUser
           )
             user = await getUser(payload);
 

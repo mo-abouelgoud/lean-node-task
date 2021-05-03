@@ -24,7 +24,7 @@ module.exports = {
 
     if (!user)
       return this.res.errorResponse(
-        sails.config.custom.responseCodes.notFound,
+        sails.config.globals.responseCodes.notFound,
         sails.__("user_not_found")
       );
 
@@ -34,7 +34,7 @@ module.exports = {
     user = _.omit(user, ["password", "id"]);
 
     return this.res.successResponse(
-      sails.config.custom.responseCodes.success,
+      sails.config.globals.responseCodes.success,
       sails.__("mission_success"),
       { user }
     );
