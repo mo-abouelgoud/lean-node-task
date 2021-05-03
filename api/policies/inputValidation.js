@@ -8,15 +8,7 @@ module.exports = function inputValidation(req, res, next) {
     );
   }
 
-  console.log(req.method, req.query);
-  let httpReqData = {};
-  if (req.method == "GET") {
-    httpReqData = req.query;
-  } else {
-    httpReqData = req.body;
-  }
-
-  const { error, value } = schema.validate(httpReqData);
+  const { error, value } = schema.validate(req.allParams());
   console.log("validation input", error, value);
   if (error) {
     return res.errorResponse(
