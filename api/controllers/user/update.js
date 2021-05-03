@@ -88,16 +88,12 @@ module.exports = {
       //update the index in algolia
       const { objectID } = await algoliaUpdateIndex(_object, user.id);
 
-      return this.res.successResponse(
-        sails.config.globals.responseCodes.success,
-        sails.__("mission_success")
-      );
+      return this.res.successResponse({ message: sails.__("mission_success") });
     } catch (error) {
-      return this.res.errorResponse(
-        sails.config.globals.responseCodes.serverError,
-        sails.__("server_error"),
-        { error }
-      );
+      return this.res.serverError({
+        message: sails.__("server_error"),
+        data: { error },
+      });
     }
   },
 };

@@ -9,7 +9,7 @@
  */
 
 module.exports.policies = {
-  "*": ["setLocale", "main-packages-init"],
+  "*": ["setLocale"],
 
   "normal-auth": {
     login: "inputValidation",

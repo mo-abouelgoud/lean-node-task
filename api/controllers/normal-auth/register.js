@@ -48,15 +48,14 @@ module.exports = {
 
     console.log(user);
 
-    if (user.length != 0)
-      return this.res.errorResponse(
-        sails.config.globals.responseCodes.badRequest,
-        sails.__("email_found"),
-        {
+    if (user.length !== 0)
+      return this.res.badRequest({
+        message: sails.__("email_found"),
+        data: {
           message: sails.__("email_found"),
           path: ["email", "username"],
-        }
-      );
+        },
+      });
 
     var attr = {
       id: sails.helpers.randomCryptoString({ size: 32 }).execSync(),
@@ -83,21 +82,19 @@ module.exports = {
       //clear unused attributes
       attr = _.omit(attr, ["password", "objectID"]);
 
-      return this.res.successResponse(
-        sails.config.globals.responseCodes.success,
-        sails.__("mission_success"),
-        {
+      return this.res.successResponse({
+        message: sails.__("mission_success"),
+        data: {
           token: token,
           user: attr,
           userType: sails.config.globals.userRoles.normalUser,
-        }
-      );
+        },
+      });
     } catch (error) {
-      return this.res.errorResponse(
-        sails.config.globals.responseCodes.serverError,
-        sails.__("database_error"),
-        { error: error }
-      );
+      return this.res.serverError({
+        message: sails.__("database_error"),
+        data: { error },
+      });
     }
   },
 };

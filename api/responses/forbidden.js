@@ -1,11 +1,14 @@
-module.exports = function (status, message, data) {
+module.exports = function ({ status, message, data }) {
   var req = this.req;
   var res = this.res;
 
-  var statusCode = status;
+  var statusCode = sails.config.globals.responseCodes.forbidden;
+
+  if (status) statusCode = status;
 
   var result = {
-    status: statusCode,
+    statusCode: statusCode,
+    status: false,
   };
 
   // Optional message

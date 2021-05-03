@@ -48,17 +48,15 @@ module.exports = {
         hitsPerPage: inputs.limit,
         filters: filters,
       });
-      return this.res.successResponse(
-        sails.config.globals.responseCodes.success,
-        sails.__("mission_success"),
-        results
-      );
+      return this.res.successResponse({
+        message: sails.__("mission_success"),
+        data: results,
+      });
     } catch (error) {
-      return this.res.errorResponse(
-        sails.config.globals.responseCodes.serverError,
-        sails.__("server_error"),
-        { error: error }
-      );
+      return this.res.serverError({
+        message: sails.__("server_error"),
+        data: { error },
+      });
     }
   },
 };

@@ -23,20 +23,16 @@ module.exports = {
     let user = this.req.user;
 
     if (!user)
-      return this.res.errorResponse(
-        sails.config.globals.responseCodes.notFound,
-        sails.__("user_not_found")
-      );
+      return this.res.notFound({ message: sails.__("user_not_found") });
 
     if (_.isArray(user)) user = _.last(user);
 
     //delete the password and id from the user obj
     user = _.omit(user, ["password", "id"]);
 
-    return this.res.successResponse(
-      sails.config.globals.responseCodes.success,
-      sails.__("mission_success"),
-      { user }
-    );
+    return this.res.successResponse({
+      message: sails.__("mission_success"),
+      data: { user },
+    });
   },
 };

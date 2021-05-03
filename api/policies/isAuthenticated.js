@@ -5,15 +5,14 @@ module.exports = async function (req, res, next) {
       res: res,
     })
     .switch({
-      error: function (err) {
-        return res.serverError(err);
+      error: function (error) {
+        return res.serverError(error);
       },
-      invalid: function (err) {
-        return res.errorResponse(
-          sails.config.globals.responseCodes.notAuthenticate,
-          sails.__("notAuthenticate"),
-          { error: err }
-        );
+      invalid: function (error) {
+        return res.notAuthenticate({
+          message: sails.__("notAuthenticate"),
+          data: error,
+        });
       },
       success: function () {
         return next();

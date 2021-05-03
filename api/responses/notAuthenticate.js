@@ -2,13 +2,12 @@ module.exports = function ({ status, message, data }) {
   var req = this.req;
   var res = this.res;
 
-  var statusCode = sails.config.globals.responseCodes.success;
+  var statusCode = sails.config.globals.responseCodes.notAuthenticate;
 
   if (status) statusCode = status;
-
   var result = {
     statusCode: statusCode,
-    status: true,
+    status: false,
   };
 
   // Optional message
