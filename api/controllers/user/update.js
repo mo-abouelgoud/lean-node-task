@@ -1,6 +1,6 @@
 const algoliaUpdateIndex = (object, objectId) => {
   object.objectID = objectId;
-
+  object = _.omit(object, ["password", "id"]);
   return algolia_index.partialUpdateObject(object);
 };
 
