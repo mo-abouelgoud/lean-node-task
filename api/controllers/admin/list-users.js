@@ -41,25 +41,23 @@ module.exports = {
     if (inputs.email)
       filters = filters + (filters ? " OR " : "") + `email:${inputs.email}`;
 
-    algolia_index
-      .search("", {
+    try {
+      let results = await algolia_index.search("", {
         page: inputs.page,
         hitsPerPage: inputs.limit,
         filters: filters,
-      })
-      .then((results) => {
-        return this.res.successResponse(
-          sails.config.globals.responseCodes.success,
-          sails.__("mission_success"),
-          results
-        );
-      })
-      .catch((error) => {
-        return this.res.errorResponse(
-          sails.config.globals.responseCodes.serverError,
-          sails.__("server_error"),
-          { error: error }
-        );
       });
+      return this.res.successResponse(
+        sails.config.globals.responseCodes.success,
+        sails.__("mission_success"),
+        results
+      );
+    } catch (error) {
+      return this.res.errorResponse(
+        sails.config.globals.responseCodes.serverError,
+        sails.__("server_error"),
+        { error: error }
+      );
+    }
   },
 };

@@ -80,23 +80,24 @@ module.exports = {
     };
 
     //update the user new data
-    var updateUser = usersRef
-      .doc(user.docId)
-      .set(_object, { merge: true })
-      .then(async () => {
-        const { objectID } = await algoliaUpdateIndex(_object, user.id);
+    try {
+      var updateUser = await usersRef
+        .doc(user.docId)
+        .set(_object, { merge: true });
 
-        return this.res.successResponse(
-          sails.config.globals.responseCodes.success,
-          sails.__("mission_success")
-        );
-      })
-      .catch((error) => {
-        return this.res.errorResponse(
-          sails.config.globals.responseCodes.serverError,
-          sails.__("server_error"),
-          { error }
-        );
-      });
+      //update the index in algolia
+      const { objectID } = await algoliaUpdateIndex(_object, user.id);
+
+      return this.res.successResponse(
+        sails.config.globals.responseCodes.success,
+        sails.__("mission_success")
+      );
+    } catch (error) {
+      return this.res.errorResponse(
+        sails.config.globals.responseCodes.serverError,
+        sails.__("server_error"),
+        { error }
+      );
+    }
   },
 };

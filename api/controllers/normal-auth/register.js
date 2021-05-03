@@ -67,37 +67,37 @@ module.exports = {
 
     attr.password = await bcrypt.hash(inputs.password, 10);
 
-    db.collection("users")
-      .add(attr)
-      .then(async (docRef) => {
-        var token = jwt.sign(
-          { user: attr, userType: sails.config.globals.userRoles.normalUser },
-          sails.config.jwtSecret,
-          { expiresIn: sails.config.jwtExpires }
-        );
+    try {
+      let docRef = await db.collection("users").add(attr);
 
-        //insert the user data to algolia index
-        const { objectID } = await algoliaAddIndex(attr);
+      //generate token
+      var token = jwt.sign(
+        { user: attr, userType: sails.config.globals.userRoles.normalUser },
+        sails.config.jwtSecret,
+        { expiresIn: sails.config.jwtExpires }
+      );
 
-        //clear unused attributes
-        attr = _.omit(attr, ["password", "objectID"]);
+      //insert the user data to algolia index
+      const { objectID } = await algoliaAddIndex(attr);
 
-        return this.res.successResponse(
-          sails.config.globals.responseCodes.success,
-          sails.__("mission_success"),
-          {
-            token: token,
-            user: attr,
-            userType: sails.config.globals.userRoles.normalUser,
-          }
-        );
-      })
-      .catch((error) => {
-        return this.res.errorResponse(
-          sails.config.globals.responseCodes.serverError,
-          sails.__("database_error"),
-          { error: error }
-        );
-      });
+      //clear unused attributes
+      attr = _.omit(attr, ["password", "objectID"]);
+
+      return this.res.successResponse(
+        sails.config.globals.responseCodes.success,
+        sails.__("mission_success"),
+        {
+          token: token,
+          user: attr,
+          userType: sails.config.globals.userRoles.normalUser,
+        }
+      );
+    } catch (error) {
+      return this.res.errorResponse(
+        sails.config.globals.responseCodes.serverError,
+        sails.__("database_error"),
+        { error: error }
+      );
+    }
   },
 };
