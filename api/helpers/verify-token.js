@@ -41,14 +41,14 @@ module.exports = {
     if (req.header("authorization")) {
       var token = req.header("authorization").split("Bearer ")[1];
 
-      if (!token) return exits.invalid(sails.__("notAuthenticate") + "1");
+      if (!token) return exits.invalid(sails.__("notAuthenticate"));
 
       return jwt.verify(
         token,
         sails.config.jwtSecret,
         async function (err, payload) {
           if (err || !payload.user)
-            return exits.invalid(sails.__("notAuthenticate") + "12");
+            return exits.invalid(sails.__("notAuthenticate"));
 
           let user = {};
 
@@ -74,6 +74,6 @@ module.exports = {
       );
     }
 
-    return exits.invalid(sails.__("notAuthenticate") + "14");
+    return exits.invalid(sails.__("notAuthenticate"));
   },
 };

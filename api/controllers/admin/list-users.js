@@ -36,6 +36,7 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
+    //create filter to the algolia index (i have to  put OR between the two filters)
     let filters = "";
     if (inputs.username) filters = filters + `username:${inputs.username}`;
     if (inputs.email)

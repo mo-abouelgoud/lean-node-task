@@ -17,7 +17,7 @@ module.exports.policies = {
   },
 
   user: {
-    details: ["isAuthenticated", "isNormalUser"],
+    "show-details": ["isAuthenticated", "isNormalUser"],
     update: ["isAuthenticated", "inputValidation", "isNormalUser"],
   },
 

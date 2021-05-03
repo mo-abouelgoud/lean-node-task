@@ -31,7 +31,7 @@ module.exports.routes = {
     validation: "login",
   },
 
-  "get /api/users": { controller: "user", action: "details" },
+  "get /api/users": { controller: "user", action: "show-details" },
   "put /api/users": {
     controller: "user",
     action: "update",
