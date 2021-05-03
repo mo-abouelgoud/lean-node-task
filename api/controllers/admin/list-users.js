@@ -1,5 +1,3 @@
-var algoliasearch = require("algoliasearch");
-
 module.exports = {
   friendlyName: "get normal user details",
   description: "get normal user details",
@@ -38,23 +36,16 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    const client = algoliasearch(
-      sails.config.algolia_config.api_id,
-      sails.config.algolia_config.admin_api_key
-    );
-    const index = client.initIndex(sails.config.algolia_config.index_name);
-
     let filters = "";
     if (inputs.username) filters = filters + `username:${inputs.username}`;
     if (inputs.email)
       filters = filters + (filters ? " OR " : "") + `email:${inputs.email}`;
 
-    index
+    algolia_index
       .search("", {
         page: inputs.page,
         hitsPerPage: inputs.limit,
         filters: filters,
-        responseFields: ["hits", "hitsPerPage", "nbPages", "page"],
       })
       .then((results) => {
         return this.res.successResponse(

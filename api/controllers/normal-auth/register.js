@@ -1,17 +1,6 @@
-var bcrypt = require("bcryptjs");
-var jwt = require("jsonwebtoken");
-
-var algoliasearch = require("algoliasearch");
-
 const algoliaAddIndex = (object) => {
-  const client = algoliasearch(
-    sails.config.algolia_config.api_id,
-    sails.config.algolia_config.admin_api_key
-  );
-  const index = client.initIndex(sails.config.algolia_config.index_name);
-
   object.objectID = object.id;
-  return index.saveObject(object);
+  return algolia_index.saveObject(object);
 };
 
 module.exports = {
@@ -76,8 +65,6 @@ module.exports = {
     };
 
     attr.password = await bcrypt.hash(inputs.password, 10);
-
-    var db = sails.config.globals.firebase.firestore();
 
     db.collection("users")
       .add(attr)

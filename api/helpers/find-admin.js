@@ -21,7 +21,6 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     let adminArray = [];
-    var db = sails.config.globals.firebase.firestore();
 
     const usersRef = db.collection("admins");
 

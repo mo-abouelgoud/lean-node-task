@@ -1,6 +1,3 @@
-var bcrypt = require("bcryptjs");
-var jwt = require("jsonwebtoken");
-
 module.exports = {
   friendlyName: "login normal user",
   description: "authenticate normal user.",

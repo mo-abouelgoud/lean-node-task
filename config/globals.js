@@ -20,7 +20,6 @@ module.exports.globals = {
   _: require("@sailshq/lodash"),
   Joi: require("joi"),
   async: require("async"),
-  firebase: require("firebase-admin"),
 
   responseCodes: {
     badRequest: 400,

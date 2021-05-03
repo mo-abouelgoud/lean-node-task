@@ -1,5 +1,3 @@
-var jwt = require("jsonwebtoken");
-
 const getUser = async (payload) => {
   var user = await sails.helpers.findUser.with({
     id: payload.user.id,

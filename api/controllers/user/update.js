@@ -1,17 +1,7 @@
-var algoliasearch = require("algoliasearch");
-
 const algoliaUpdateIndex = (object, objectId) => {
-  const client = algoliasearch(
-    sails.config.algolia_config.api_id,
-    sails.config.algolia_config.admin_api_key
-  );
-  const index = client.initIndex(sails.config.algolia_config.index_name);
-
   object.objectID = objectId;
 
-  console.log(object, objectId);
-
-  return index.partialUpdateObject(object);
+  return algolia_index.partialUpdateObject(object);
 };
 
 module.exports = {
@@ -80,9 +70,6 @@ module.exports = {
           }
         );
     }
-
-    //init the firestore
-    var db = sails.config.globals.firebase.firestore();
 
     const usersRef = db.collection("users");
 
