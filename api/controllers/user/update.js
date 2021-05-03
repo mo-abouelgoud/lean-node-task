@@ -1,7 +1,7 @@
 const algoliaUpdateIndex = (object, objectId) => {
   object.objectID = objectId;
   object = _.omit(object, ["password", "id"]);
-  return algolia_index.partialUpdateObject(object);
+  return algoliaIndex.partialUpdateObject(object);
 };
 
 module.exports = {
@@ -81,7 +81,7 @@ module.exports = {
 
     //update the user new data
     try {
-      var updateUser = await usersRef
+      let updateUser = await usersRef
         .doc(user.docId)
         .set(_object, { merge: true });
 

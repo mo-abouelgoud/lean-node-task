@@ -18,7 +18,7 @@ module.exports.globals = {
    ****************************************************************************/
 
   _: require("@sailshq/lodash"),
-  Joi: require("joi"),
+
   async: require("async"),
 
   responseCodes: {
@@ -31,6 +31,7 @@ module.exports.globals = {
     success: 200,
     create: 201,
   },
+
   userRoles: {
     normalUser: "NORMAL_USER",
     adminUser: "ADMIN_USER",

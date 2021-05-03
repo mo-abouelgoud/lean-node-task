@@ -1,5 +1,5 @@
 module.exports = function inputValidation(req, res, next) {
-  var schema = require("../validation/" + req.options.validation);
+  let schema = require("../validation/" + req.options.validation);
   if (!schema) {
     return res.serverError({
       message: sails.__("server_error"),

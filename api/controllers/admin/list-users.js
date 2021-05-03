@@ -43,7 +43,7 @@ module.exports = {
       filters = filters + (filters ? " OR " : "") + `email:${inputs.email}`;
 
     try {
-      let results = await algolia_index.search("", {
+      let results = await algoliaIndex.search("", {
         page: inputs.page,
         hitsPerPage: inputs.limit,
         filters: filters,

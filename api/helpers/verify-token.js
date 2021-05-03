@@ -1,5 +1,5 @@
 const getUser = async (payload) => {
-  var user = await sails.helpers.findUser.with({
+  let user = await sails.helpers.findUser.with({
     id: payload.user.id,
   });
 
@@ -7,7 +7,7 @@ const getUser = async (payload) => {
 };
 
 const getAdmin = async (payload) => {
-  var admin = await sails.helpers.findAdmin.with({
+  let admin = await sails.helpers.findAdmin.with({
     id: payload.user.id,
   });
 
@@ -35,11 +35,12 @@ module.exports = {
     invalid: {},
   },
   fn: function (inputs, exits) {
-    var req = inputs.req;
-    var res = inputs.res;
+    let req = inputs.req;
+    let res = inputs.res;
 
-    if (req.header("authorization")) {
-      var token = req.header("authorization").split("Bearer ")[1];
+    let token = req.header("authorization") || null;
+    if (token) {
+      token = token.split("Bearer ")[1];
 
       if (!token) return exits.invalid(sails.__("notAuthenticate"));
 

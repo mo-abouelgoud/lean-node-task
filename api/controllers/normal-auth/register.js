@@ -1,7 +1,7 @@
 const algoliaAddIndex = (object) => {
   object.objectID = object.id;
   object = _.omit(object, ["password", "id"]);
-  return algolia_index.saveObject(object);
+  return algoliaIndex.saveObject(object);
 };
 
 module.exports = {
@@ -57,7 +57,7 @@ module.exports = {
         },
       });
 
-    var attr = {
+    let attr = {
       id: sails.helpers.randomCryptoString({ size: 32 }).execSync(),
       email: inputs.email.toLowerCase(),
       username: inputs.username.toLowerCase(),
@@ -70,7 +70,7 @@ module.exports = {
       let docRef = await db.collection("users").add(attr);
 
       //generate token
-      var token = jwt.sign(
+      const token = jwt.sign(
         { user: attr, userType: sails.config.globals.userRoles.normalUser },
         sails.config.jwtSecret,
         { expiresIn: sails.config.jwtExpires }

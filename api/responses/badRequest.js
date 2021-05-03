@@ -1,12 +1,12 @@
 module.exports = function ({ status, message, data }) {
-  var req = this.req;
-  var res = this.res;
+  let req = this.req;
+  let res = this.res;
 
-  var statusCode = sails.config.globals.responseCodes.badRequest;
+  let statusCode = sails.config.globals.responseCodes.badRequest;
 
   if (status) statusCode = status;
 
-  var result = {
+  let result = {
     statusCode: statusCode,
     status: false,
   };

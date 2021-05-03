@@ -1,5 +1,3 @@
-var crypto = require("crypto");
-
 module.exports = {
   friendlyName: "Generate random string",
   description:
@@ -15,7 +13,7 @@ module.exports = {
   fn: function (inputs, exits) {
     console.log("size", inputs.size);
     // randomBytes returns double of size, so we halve it to get somewhat close to the caller's request
-    var text = crypto.randomBytes(inputs.size * 0.5).toString("hex");
+    let text = crypto.randomBytes(inputs.size * 0.5).toString("hex");
     return exits.success(text);
   },
 };

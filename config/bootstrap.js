@@ -12,19 +12,21 @@
 module.exports.bootstrap = async function () {
   bcrypt = require("bcryptjs");
   jwt = require("jsonwebtoken");
+  joi = require("joi");
+  crypto = require("crypto");
 
   //add the algolia index
-  algoliasearch = require("algoliasearch");
-  algolia_client = algoliasearch(
+  algoliaSearch = require("algoliasearch");
+  algoliaClient = algoliaSearch(
     sails.config.algolia_config.api_id,
     sails.config.algolia_config.admin_api_key
   );
 
-  algolia_index = algolia_client.initIndex(
+  algoliaIndex = algoliaClient.initIndex(
     sails.config.algolia_config.index_name
   );
   //set algolia settings for search
-  algolia_index.setSettings({
+  algoliaIndex.setSettings({
     searchableAttributes: ["email", "username"],
     attributesForFaceting: ["email", "username"],
     responseFields: ["hits", "hitsPerPage", "nbPages", "page"],

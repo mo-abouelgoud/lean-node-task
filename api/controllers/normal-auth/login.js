@@ -37,12 +37,12 @@ module.exports = {
 
     if (_.isArray(user)) user = _.last(user);
 
-    var passwordIsValid = await bcrypt.compare(inputs.password, user.password);
+    let passwordIsValid = await bcrypt.compare(inputs.password, user.password);
     if (!passwordIsValid) {
       return this.res.badRequest({ message: sails.__("invalid_cred") });
     }
 
-    var token = jwt.sign(
+    let token = jwt.sign(
       { user: user, userType: sails.config.globals.userRoles.normalUser },
       sails.config.jwtSecret,
       { expiresIn: sails.config.jwtExpires }
