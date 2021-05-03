@@ -9,22 +9,20 @@
  */
 
 module.exports.policies = {
+  "*": ["setLocale", "main-packages-init"],
 
-    '*': ['setLocale', 'main-packages-init'],
-    
-    "normal-auth": {
-		login:  'inputValidation',
-		register:  'inputValidation',
-	},
-	
-    user: {
-        details: ['isAuthenticated','isNormalUser'],
-        update: ['isAuthenticated','inputValidation','isNormalUser']
-    },
+  "normal-auth": {
+    login: "inputValidation",
+    register: "inputValidation",
+  },
 
-    admin:{
-        login: 'inputValidation',
-        "list-users":['inputValidation','isAuthenticated','isAdmin']
-    }
+  user: {
+    details: ["isAuthenticated", "isNormalUser"],
+    update: ["isAuthenticated", "inputValidation", "isNormalUser"],
+  },
 
+  admin: {
+    login: "inputValidation",
+    "list-users": ["inputValidation", "isAuthenticated", "isAdmin"],
+  },
 };
