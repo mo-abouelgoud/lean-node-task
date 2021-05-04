@@ -2,7 +2,7 @@ module.exports = function inputValidation(req, res, next) {
   let schema = require("../validation/" + req.options.validation);
   if (!schema) {
     return res.serverError({
-      message: sails.__("server_error"),
+      message: this.req.i18n.__("server_error"),
       data: { error: req.options.controller + " " + req.options.action },
     });
   }
@@ -11,7 +11,7 @@ module.exports = function inputValidation(req, res, next) {
   console.log("validation input", error, value);
   if (error) {
     return res.validationError({
-      message: sails.__("validation_error"),
+      message: this.req.i18n.__("validation_error"),
       data: error.details,
     });
   } else {

@@ -43,10 +43,7 @@ module.exports = {
     let user = this.req.user;
 
     if (!user)
-      return this.res.errorResponse(
-        sails.config.globals.responseCodes.notFound,
-        sails.__("user_not_found")
-      );
+      return this.res.notFound({ message: this.req.i18n.__("user_not_found") });
 
     if (_.isArray(user)) user = _.last(user);
 
@@ -60,15 +57,14 @@ module.exports = {
     if (!_.isEmpty(attr)) {
       let _user = await sails.helpers.findUser.with(attr);
 
-      if (_user.length != 0)
-        return this.res.errorResponse(
-          sails.config.globals.responseCodes.badRequest,
-          sails.__("email_found"),
-          {
-            message: sails.__("email_found"),
+      if (_user.length !== 0)
+        return this.res.badRequest({
+          message: this.req.i18n.__("email_found"),
+          data: {
+            message: this.req.i18n.__("email_found"),
             path: ["email", "username"],
-          }
-        );
+          },
+        });
     }
 
     const usersRef = db.collection("users");
@@ -88,10 +84,12 @@ module.exports = {
       //update the index in algolia
       const { objectID } = await algoliaUpdateIndex(_object, user.id);
 
-      return this.res.successResponse({ message: sails.__("mission_success") });
+      return this.res.successResponse({
+        message: this.req.i18n.__("mission_success"),
+      });
     } catch (error) {
       return this.res.serverError({
-        message: sails.__("server_error"),
+        message: this.req.i18n.__("server_error"),
         data: { error },
       });
     }

@@ -33,13 +33,13 @@ module.exports = {
     });
 
     if (admin.length === 0)
-      return this.res.notFound({ message: sails.__("user_not_found") });
+      return this.res.notFound({ message: this.req.i18n.__("user_not_found") });
 
     if (_.isArray(admin)) admin = _.last(admin);
 
     let passwordIsValid = await bcrypt.compare(inputs.password, admin.password);
     if (!passwordIsValid) {
-      return this.res.badRequest({ message: sails.__("invalid_cred") });
+      return this.res.badRequest({ message: this.req.i18n.__("invalid_cred") });
     }
 
     let token = jwt.sign(
@@ -49,7 +49,7 @@ module.exports = {
     );
 
     return this.res.successResponse({
-      message: sails.__("mission_success"),
+      message: this.req.i18n.__("mission_success"),
       data: { token, userType: sails.config.globals.userRoles.adminUser },
     });
   },

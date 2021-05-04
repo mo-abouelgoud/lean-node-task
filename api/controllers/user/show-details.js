@@ -23,7 +23,7 @@ module.exports = {
     let user = this.req.user;
 
     if (!user)
-      return this.res.notFound({ message: sails.__("user_not_found") });
+      return this.res.notFound({ message: this.req.i18n.__("user_not_found") });
 
     if (_.isArray(user)) user = _.last(user);
 
@@ -31,7 +31,7 @@ module.exports = {
     user = _.omit(user, ["password", "id"]);
 
     return this.res.successResponse({
-      message: sails.__("mission_success"),
+      message: this.req.i18n.__("mission_success"),
       data: { user },
     });
   },

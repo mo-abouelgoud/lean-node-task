@@ -1,28 +1,23 @@
-/**
- * Policy Mappings
- * (sails.config.policies)
- *
- * Policies are simple functions which run **before** your actions.
- *
- * For more information on configuring policies, check out:
- * https://sailsjs.com/docs/concepts/policies
- */
-
 module.exports.policies = {
-  "*": ["setLocale"],
+  "*": "setLocale",
 
   "normal-auth": {
-    login: "inputValidation",
-    register: "inputValidation",
+    login: ["setLocale", "inputValidation"],
+    register: ["setLocale", "inputValidation"],
   },
 
   user: {
-    "show-details": ["isAuthenticated", "isNormalUser"],
-    update: ["isAuthenticated", "inputValidation", "isNormalUser"],
+    "show-details": ["setLocale", "isAuthenticated", "isNormalUser"],
+    update: ["setLocale", "isAuthenticated", "inputValidation", "isNormalUser"],
   },
 
   admin: {
-    login: "inputValidation",
-    "list-users": ["inputValidation", "isAuthenticated", "isAdmin"],
+    login: ["setLocale", "inputValidation"],
+    "list-users": [
+      "setLocale",
+      "inputValidation",
+      "isAuthenticated",
+      "isAdmin",
+    ],
   },
 };

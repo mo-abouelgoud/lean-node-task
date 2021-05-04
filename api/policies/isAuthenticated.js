@@ -1,6 +1,6 @@
 module.exports = async function (req, res, next) {
-  sails.helpers
-    .verifyToken({
+  sails.helpers.verifyToken
+    .with({
       req: req,
       res: res,
     })
@@ -10,7 +10,7 @@ module.exports = async function (req, res, next) {
       },
       invalid: function (error) {
         return res.notAuthenticate({
-          message: sails.__("notAuthenticate"),
+          message: this.req.i18n.__("notAuthenticate"),
           data: error,
         });
       },

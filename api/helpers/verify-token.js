@@ -42,14 +42,14 @@ module.exports = {
     if (token) {
       token = token.split("Bearer ")[1];
 
-      if (!token) return exits.invalid(sails.__("notAuthenticate"));
+      if (!token) return exits.invalid(this.req.i18n.__("notAuthenticate"));
 
       return jwt.verify(
         token,
         sails.config.jwtSecret,
         async function (err, payload) {
           if (err || !payload.user)
-            return exits.invalid(sails.__("notAuthenticate"));
+            return exits.invalid(this.req.i18n.__("notAuthenticate"));
 
           let user = {};
 
@@ -61,7 +61,7 @@ module.exports = {
             user = await getUser(payload);
 
           if (user.length == 0)
-            return exits.invalid(sails.__("notAuthenticate"));
+            return exits.invalid(this.req.i18n.__("notAuthenticate"));
 
           if (_.isArray(user)) user = _.last(user);
 
@@ -75,6 +75,6 @@ module.exports = {
       );
     }
 
-    return exits.invalid(sails.__("notAuthenticate"));
+    return exits.invalid(this.req.i18n.__("notAuthenticate"));
   },
 };

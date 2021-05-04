@@ -1,6 +1,8 @@
 module.exports = joi
-  username: joi
-  email: Joi.string().email(),
-  page: joi
-  limit: joi
-}).unknown();
+  .object({
+    username: joi.string(),
+    email: joi.string().email(),
+    page: joi.number().required(),
+    limit: joi.number().required(),
+  })
+  .unknown();

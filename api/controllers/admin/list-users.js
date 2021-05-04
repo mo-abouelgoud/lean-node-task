@@ -49,12 +49,12 @@ module.exports = {
         filters: filters,
       });
       return this.res.successResponse({
-        message: sails.__("mission_success"),
+        message: this.req.i18n.__("mission_success"),
         data: results,
       });
     } catch (error) {
       return this.res.serverError({
-        message: sails.__("server_error"),
+        message: this.req.i18n.__("server_error"),
         data: { error },
       });
     }

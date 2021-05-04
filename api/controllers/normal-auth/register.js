@@ -50,9 +50,9 @@ module.exports = {
 
     if (user.length !== 0)
       return this.res.badRequest({
-        message: sails.__("email_found"),
+        message: this.req.i18n.__("email_found"),
         data: {
-          message: sails.__("email_found"),
+          message: this.req.i18n.__("email_found"),
           path: ["email", "username"],
         },
       });
@@ -83,7 +83,7 @@ module.exports = {
       attr = _.omit(attr, ["password", "objectID"]);
 
       return this.res.successResponse({
-        message: sails.__("mission_success"),
+        message: this.req.i18n.__("mission_success"),
         data: {
           token: token,
           user: attr,
@@ -92,7 +92,7 @@ module.exports = {
       });
     } catch (error) {
       return this.res.serverError({
-        message: sails.__("database_error"),
+        message: this.req.i18n.__("database_error"),
         data: { error },
       });
     }
