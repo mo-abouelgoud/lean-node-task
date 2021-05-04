@@ -58,7 +58,7 @@ module.exports = {
       });
 
     let attr = {
-      id: sails.helpers.randomCryptoString({ size: 32 }).execSync(),
+      id: sails.helpers.randomCryptoString.with({ size: 32 }),
       email: inputs.email.toLowerCase(),
       username: inputs.username.toLowerCase(),
       age: inputs.age,

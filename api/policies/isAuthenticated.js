@@ -10,7 +10,7 @@ module.exports = async function (req, res, next) {
       },
       invalid: function (error) {
         return res.notAuthenticate({
-          message: this.req.i18n.__("notAuthenticate"),
+          message: req.i18n.__("notAuthenticate"),
           data: error,
         });
       },

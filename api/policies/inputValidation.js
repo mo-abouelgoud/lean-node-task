@@ -11,7 +11,7 @@ module.exports = function inputValidation(req, res, next) {
   console.log("validation input", error, value);
   if (error) {
     return res.validationError({
-      message: this.req.i18n.__("validation_error"),
+      message: req.i18n.__("validation_error"),
       data: error.details,
     });
   } else {
