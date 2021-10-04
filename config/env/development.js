@@ -22,6 +22,7 @@ module.exports = {
   jwtSecret: "secret|Jwt|prefered|token@#2@",
   jwtExpires: 60 * 60 * 2,
 
+  //TODO: add your firebase Access_KEYS
   firebase_config: {
     url: "https://lean-node-task-266b7.firebaseio.com",
     type: "service_account",
@@ -39,8 +40,9 @@ module.exports = {
       "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-zpkl7%40lean-node-task-266b7.iam.gserviceaccount.com",
   },
   algolia_config: {
-    admin_api_key: "d1d30b29a1a10985a4ae6854c060088e",
-    api_id: "XIHFTFPY4S",
+    //TODO: add your algolia Access_KEYS
+    admin_api_key: "4a426be9c0db10e7bdc97297c9d236f1",
+    api_id: "HGUFRRFPNZ",
     index_name: "dev_lean_node_task",
   },
 };
