@@ -49,6 +49,12 @@ module.exports.routes = {
     validation: "listData",
   },
 
+  "put /api/settings": {
+    controller: "admin",
+    action: "manage-settings",
+    validation: "manageSettings",
+  },
+
   /***************************************************************************
    *                                                                          *
    * More custom routes here...                                               *
