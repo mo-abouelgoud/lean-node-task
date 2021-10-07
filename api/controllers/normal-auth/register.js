@@ -62,6 +62,7 @@ module.exports = {
       email: inputs.email.toLowerCase(),
       username: inputs.username.toLowerCase(),
       age: inputs.age,
+      status:true
     };
 
     attr.password = await bcrypt.hash(inputs.password, 10);
