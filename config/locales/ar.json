@@ -1,0 +1,9 @@
+{
+	"validation_error": "خطا في البيانات المرسله",
+	"invalid_cred": "بيانات تسجيل الدخول غير صحيحة",
+	"email_found": "الايميل او اسم المستخدم موجود من قبل",
+	"mission_success": "تمت العمليه بنجاح",
+	"database_error": "هناك خطا قد حدث",
+	"notAuthenticate": "غير مسموح لك بالوصول الي البيانات",
+	"user_not_found": "user_not_found"
+}
