@@ -22,6 +22,7 @@ We need you to create simple APIs for user management which uses to following in
 
 - Create new project using [SailsJs framework](https://sailsjs.com/)
 - Store data in [Firestore database](https://firebase.google.com/products/firestore) using [firebase admin SDK](https://www.npmjs.com/package/firebase-admin)
+- Cloud functions are used to listen to changes on data and make updates on other related data
 - Push/Fetch users data to/from [Algolia](https://www.algolia.com/) using [algoliasearch](https://www.npmjs.com/package/algoliasearch) library
 - Generate and verify tokens by [JTW](https://jwt.io/) using [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) library
 - Create postman collection to test your APIs
@@ -71,7 +72,7 @@ At the end of this file, you will find the project template which you need to co
   - **Outputs** :
     - Success status
 
-- API for normal user to login(New)
+- API for normal user to login(Ready)
   - **Inputs** :
     - Username
     - Password
@@ -125,6 +126,13 @@ At the end of this file, you will find the project template which you need to co
   - **Inputs** :
     - Appointment id
   - **Outputs** :
+    - Success
+
+- API for admin to block a user(New\_Sub\_Part) ##
+  - Make sure when user is blocked all of his appointments time slots are freed and increase the available slots (this needs to be implemented using **cloud**** function** to listen the change on users)
+  - **Inputs** :
+    - User id
+  - **Outputs** :
     - success
 
 - API for admin to list and search for registered users(New)
@@ -150,5 +158,9 @@ Once you finish please reply to this email, send us your
   - [alzaid@leannode.com](mailto:alzaid@leannode.com)
   - [ahmed@leannode.com](mailto:ahmed@leannode.com)
   - [mohamed.mostafa@leannode.com](mailto:mohamed.mostafa@leannode.com)
+- feel free to ask about anything not clear in the task
+  - [mohamed.mostafa@leannode.com](mailto:mohamed.mostafa@leannode.com)
+- PostMan collection
+  - https://www.getpostman.com/collections/f1aa30271cd601d5b09e
 - Project template just fork it and show us the hero .^\_^.
   - [https://bitbucket.org/leannode/backendsenior/src/master/](https://bitbucket.org/leannode/backendsenior/src/master/)
