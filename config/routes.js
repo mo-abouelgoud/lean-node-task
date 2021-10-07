@@ -43,11 +43,7 @@ module.exports.routes = {
     action: "login",
     validation: "login",
   },
-  "get /admin/list-users": {
-    controller: "admin",
-    action: "list-users",
-    validation: "listData",
-  },
+
 
   "put /admin/settings": {
     controller: "admin",

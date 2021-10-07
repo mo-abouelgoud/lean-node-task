@@ -1,7 +1,6 @@
 const algoliaAddIndex = (object) => {
-  object.objectID = object.id;
-  object = _.omit(object, ["password", "id"]);
-  return algoliaIndex.saveObject(object);
+
+  //TODO: add algolia code
 };
 
 module.exports = {

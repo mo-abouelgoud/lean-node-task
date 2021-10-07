@@ -13,11 +13,5 @@ module.exports.policies = {
 
   admin: {
     login: ["setLocale", "inputValidation"],
-    "list-users": [
-      "setLocale",
-      "inputValidation",
-      "isAuthenticated",
-      "isAdmin",
-    ],
-  },
+  }
 };
