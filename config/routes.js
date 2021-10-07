@@ -38,21 +38,27 @@ module.exports.routes = {
     validation: "updateUser",
   },
 
-  "patch /api/admin/login": {
+  "patch /admin/login": {
     controller: "admin",
     action: "login",
     validation: "login",
   },
-  "get /api/admin/list-users": {
+  "get /admin/list-users": {
     controller: "admin",
     action: "list-users",
     validation: "listData",
   },
 
-  "put /api/settings": {
+  "put /admin/settings": {
     controller: "admin",
     action: "manage-settings",
     validation: "manageSettings",
+  },
+
+  "put /admin/user/:id/change-status": {
+    controller: "admin",
+    action: "change-user-status",
+    validation: "changeStatus",
   },
 
   /***************************************************************************
