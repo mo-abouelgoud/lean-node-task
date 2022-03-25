@@ -24,25 +24,25 @@ module.exports = {
 
   //TODO: add your firebase Access_KEYS
   firebase_config: {
-    url: "https://lean-node-task-266b7.firebaseio.com",
+    url: "https://lean-node-task-5c197.firebaseio.com",
     type: "service_account",
-    project_id: "lean-node-task-266b7",
-    private_key_id: "16af6cad980141d1e7abf28a1b9762bcab5dcc69",
+    project_id: "lean-node-task-5c197",
+    private_key_id: "65fb8ded4239b3a7102a76fb05ee82ee101da5fe",
     private_key:
-      "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDJCpOPcWtwAwSw\nJzrl8BNggdOVj6IwtRMrrGnxnMvbSPfx+RpRc9U8giscgH8YGAoA+8EenFrEmsx4\ntzlWO8EM1oAn0WHMvGXqT9IqcEBMoR2vhZp74auaX2whL+WhSULtzirTiag4QNMZ\nBHeKho28V9dKDnE3J7uWgTDQZisoo0+K54ULKKZunmSqUtDdCMn1gIeZxg9F4+8A\n0yGr3IMuj0m44X6cTKXDA95zE5ZupAP0I+QDk5/T3kFKl+/tgQrLpegThFc3alyJ\nN34H3zRmpeU4mmhla7vyyh2DNu/1e2DppbvCSKej5d0XIf3aMjf+ieH1grfU0EG4\ndKqGuB+LAgMBAAECggEAC+iOeQ602Hu1SWHpgTlJTIwkJlXNu6jeK9YYqHErOiAG\nX9TrlCuSU/U57IRIAvtZjFldRRzp23934SapRMxhUQtbqAAlFOWL++cigdUIWgGp\nKn51eiUR7yD73LNjnLwkNMXjj4g16K8eUfsLwa7asm9Zl09nsWavG+knJREIOW3o\nJYs67s921cPqCBdwatB0TVzhRjye0iKnUe9+B8mJRWPwDhzO+NUVjn07h+OU2rp6\n2DpeLqrGWcEB8ByCjy89zZSbYFkymhCReFaOfgnR0qvSsQdTDZez6+EXgRBldGpy\nTP9pzjdX+2PrrnHtMfDLSYvnIPKtGk0/caQxiFrzEQKBgQDlZfyIwhQ5xN/QwDPl\nq7NFCNCe63Jtfeug8a3q3jEy4Ga011MREsnlfOBA+XR8s+7srv6VDA/N9514iRvb\nRZJ8OT7atlFGFpcGvJ1l4laGeW7CV6nRHBmpzXQ6rrtdaP9IULZLzgfA7jK248y7\nfwRyEbC7Oh2Xt8AHY7OKg5RQ/QKBgQDgWsU7uOWgakFtRSkKbyIj3XEWPdSu6513\n1GaAk+37CvJHdTeSfYFGTZrX1Cg3x600opOKxup+3b8GJKMTfTZfTQA/Bh0cQXUQ\nXWqPEqcnwubbVnQUp3DVXysxsL8yvhUKyRgje12j7LRlv21JfK4FmyEef6lPRBR3\nEvb9rzm9JwKBgEGvuGY4nK4GD8iooLOtPMIRyhsXdEah/eyyB4jvYsscsowp9CE5\nbhKGdXhlddOXelzPpxpqv8PMmYzARfe9rjpf8f2SoyccpNZLAA8ChqAu+WYwz/GO\nyFJ1AEkla4VN4XuFkQ2Xy2SVUHRKOn+d2VoIcsDJ3VtqRFRZWjnZf4jJAoGABFne\nT10zntvQrwTTWe9z0ww9YDgMwuOw5x0Ia9/ykpbQwhAE5uNmOW3R3fOwX/yQYF/y\nypM3AwTb6ouVWhBomIqOwaolsGGYmpulMGclNMEz5vcTQz9IEetJlCogWySSleX2\ngOGonEA/82U2AmHXoiYzCztgljf0yaZlgd//F6sCgYEAxnB6r1Ms1JYX1MZUOdH0\nMBD5qdEbCKmOcRDMaFYBa53JUmF27KQyqO664gHOT17dM82rFrjpp48dRtfNswHJ\n4sEyGcBdUcPLPzzdxTlnLsDn9DUpdP5Fnc8I7NajvnrxHc8SoaLFOpbpnztz8Q+k\nrsi5PpS/e38qrV4WoCg7OiU=\n-----END PRIVATE KEY-----\n",
+      "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDZ475a6bkf0T74\nLpD9pwF/kiqpqzaJZmR6CXZlZw/22nPudGNRC4B4zm/UhrTZtQ31iuk8iiCHEglY\nsXOt+8ecJn8Fzx1aveQC6cBHWjtTWgGd+gj0k+neoZHlH5K2yulo5TTnTYz17kxZ\n1wmmWAOegiNKhyjVEVAYUrPI3AXYkk65Iijz819m4Z+LaBD+6H1fUTEmhQ03Wv+k\nCJaduWQ87/K676o3xedQE0vi3N5UzyFZCYTyetSiuTA4swDD7D0yuqER2O/8oSfW\nDqeEivCi6W5HNvknr9KbMEs9cMNctBefRm/6+hOgatG31+l9jswdqGF4tSsKUVPR\ninY8gbFRAgMBAAECggEAI/bUuKoosE5tbQbipRDSd9K8eqeT/OHgZnRMDTi8XdZ4\n7ucEbaAkYyGlO8Ma9BmlEDO5g7tDhd09mwd550HOahZrPkjiuNOXCxQMyg+Os0IB\nT6ixnw0QZnrssJD25SJg8btuHAT6O1hLVJjgiDWxgzxKbvFtlUhM8XbVI1Y4cM0y\nJhjFympbnIPqmOuyGGqwY3iK7nbXb77s0IogGdN7yPUHkag47YeFYC+Z0eNbd4rp\nWVqrv6UXA05c2ggnRrKzcR1eonJUm5t0JAIgl0FCInbIYBC583kLFaHplt/YT939\nIQ1bC5ZKTreIZ8ilPZSjCpYZCQC+OMxNZo3JpKyfMQKBgQDunzIU57sD5iQ2GbH1\n0pGeGzel2c5PSnRJy7S4jYqkicl2T3tbTq7gB6Kth1DA1mC8w2jrJ8dfIF1uDKcW\nlvZD+11Zhu1K2BemJOTsi7HPQ6VTHXskVf7rGil6ZS6BIt92dH0d5wnrk94smdYT\nxaBcIajJpKpfiwnek1JY8eNcfwKBgQDpwgWBn5tTrCt2dNABAxROGMDyKJr176dW\nBv1s0OT/9ymAte1qYmfVVuZ1PRnjXYbjteAX7DEbwmmjffANiyqugAPED2z6GqjA\nVw2qFuAqZzpB0A/YIKnm32naAikY/cKGfrGO1ELxDr8GwytF33S/1cpu3EyCYYbc\nlDE7HXlKLwKBgEVmzdUgtNbkd8G4ZXb+wFWAywWUvJl5KStRcQWAPUOvw4WChnk/\nAEOuVNUtlwIPF+Gu3/QNBMKZEjNwwKQkUgnhsPvZ72gmQ3KSJnbaBmQm442x9F/U\nFylf2ZJ8nTL35pB4Pu+Ug+Edh6/nKklj4EkLjSDgoKDbOoqexIOUDrGXAoGACEvg\nkicuBhw4Nq4Sq9aGI/dw8adLSKtGzyDUYcZQOl11VaIfWQVBFitNZp/SiWVKYk6U\nM4UogQm3YhwYJwLncuYMPCsn/QBxONJeI8lID3k2chuGVG9kWFNZmGk3ODHZc5iP\niLgz4AZb9Ut7/7DcnepikuiytnXrqWyBCs4S/fUCgYEAqCNXfUqjJts8w5k+Yu5H\n3KU6b6YDV5+vqgA8QQluUhinK5FzXJy/VoqPgSfeV0XVC7wXJjg4sIlmiA/Pr+Ju\niwfWCWu1+oqvUI2YUMJ+T+C0L4vB5lKR/twrrhdEunQy2OSBwAG3LM7DMVPTbpRW\nw6JKErB1/mwB+gVyZp0nxXQ=\n-----END PRIVATE KEY-----\n",
     client_email:
-      "firebase-adminsdk-zpkl7@lean-node-task-266b7.iam.gserviceaccount.com",
-    client_id: "117826182877669313971",
+      "firebase-adminsdk-zi0x5@lean-node-task-5c197.iam.gserviceaccount.com",
+    client_id: "109936309311512788529",
     auth_uri: "https://accounts.google.com/o/oauth2/auth",
     token_uri: "https://oauth2.googleapis.com/token",
     auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
     client_x509_cert_url:
-      "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-zpkl7%40lean-node-task-266b7.iam.gserviceaccount.com",
+      "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-zi0x5%40lean-node-task-5c197.iam.gserviceaccount.com"
   },
   algolia_config: {
     //TODO: add your algolia Access_KEYS
-    admin_api_key: "4a426be9c0db10e7bdc97297c9d236f1",
-    api_id: "HGUFRRFPNZ",
+    admin_api_key: "d563f6908fc6f8331ffcf9d90eedae27",
+    api_id: "89FL70IMZO",
     index_name: "dev_lean_node_task",
   },
 };

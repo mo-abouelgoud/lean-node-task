@@ -1,6 +1,12 @@
 const algoliaAddIndex = (object) => {
 
   //TODO: add algolia code
+  const objectID = object.id;
+  delete object.id;
+  return algoliaIndex.saveObject({
+    ...object,
+    objectID
+  });
 };
 
 module.exports = {
@@ -80,7 +86,7 @@ module.exports = {
       const { objectID } = await algoliaAddIndex(attr);
 
       //clear unused attributes
-      attr = _.omit(attr, ["password", "objectID"]);
+      attr = _.omit(attr, ["password", "objectID", "id"]);
 
       return this.res.successResponse({
         message: this.req.i18n.__("mission_success"),
