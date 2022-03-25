@@ -1,6 +1,6 @@
 module.exports = {
   friendlyName: "show registered users",
-  description: "show registered users",
+  description: "show registered users with optional search",
 
   inputs: {
     username: {
@@ -47,11 +47,13 @@ module.exports = {
     if (inputs.email) query = inputs.email;
     if (inputs.username) query = query ? (query + " " + inputs.username) : inputs.username;
 
-    //update the user new data
     try {
       const { hits } = await algoliaIndex.search(query, {
         page,
         hitsPerPage
+        // You can use that instead of looping results to filter them
+        // But you would have extra fields ["_highlightResult", "objectID"]
+        // attributesToRetrieve: ['id', 'username', 'email', 'age']
       });
       const users = _.map(hits, _.partialRight(_.pick, ['id', 'username', 'email', 'age']));
 
