@@ -54,6 +54,14 @@ module.exports = {
         let data = doc.data();
         foundAppointments.push(data);
       });
+      // Stop admin from changing settings if there are running appointments
+      /**@todo
+       * According to current business if you want to
+       * change hospital working hours of time slots
+       * you will need migration file
+       * to reSchedule appointments
+       * and inform every user by his new appointment
+       */
       if (foundAppointments.length) {
         return this.res.badRequest({ message: this.req.i18n.__("change_settings_validation") });
       }
