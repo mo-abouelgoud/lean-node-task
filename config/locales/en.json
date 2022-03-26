@@ -10,5 +10,9 @@
   "server_error":"the server returned error",
   "user_not_found":"user not Found",
   "change_settings_validation": "You can't change working hours while appointments in progress",
-  "duplicated_service": "This service is already exists"
+  "duplicated_service": "This service is already exists",
+  "max_day_appointments": "You can't reserve more than 3 appointments per day!",
+  "max_service_appointments": "You can't reserve 2 appointments to the same service on the same day!",
+  "error_happened": "Error occured, please call custom service",
+  "reserved_appointment": "This appointment is already reserved"
 }

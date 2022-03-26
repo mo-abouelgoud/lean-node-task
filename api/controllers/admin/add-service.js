@@ -33,17 +33,9 @@ module.exports = {
       signature: sails.helpers.getSignature.with({ id: this.req.user.id })
     };
 
-    const serviceRef = db.collection("services");
-
     try {
-      let duplicatedServices = [];
-      const services = await serviceRef
-        .where("name", "==", inputs.serviceName)
-        .get();
-      services.forEach((doc) => {
-        let data = doc.data();
-        duplicatedServices.push(data);
-      });
+      const duplicatedServices = await sails.helpers.findService
+        .with({ name: inputs.serviceName });
       if (duplicatedServices.length) {
         return this.res.badRequest({ message: this.req.i18n.__("duplicated_service") });
       }

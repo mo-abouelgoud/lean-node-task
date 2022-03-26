@@ -9,6 +9,7 @@ module.exports.policies = {
   user: {
     "show-details": ["setLocale", "isAuthenticated", "isNormalUser"],
     "show-services": ["setLocale", "isAuthenticated", "isNormalUser"],
+    "add-appointment": ["setLocale", "isAuthenticated", "isNormalUser"],
     update: ["setLocale", "isAuthenticated", "inputValidation", "isNormalUser"],
   },
 

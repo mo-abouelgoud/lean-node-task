@@ -20,17 +20,10 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    const servicesRef = db.collection("services");
 
     try {
-      let servicesDocs = [];
-      const dbServices = await servicesRef
-      .where("isActive", "==", true)
-      .get();
-      dbServices.forEach((doc) => {
-        let data = doc.data();
-        servicesDocs.push(data);
-      });
+      const servicesDocs = await sails.helpers.findService
+        .with({});
       const services = _.map(servicesDocs, _.partialRight(_.pick, ['id', 'name']));
 
       return this.res.successResponse({

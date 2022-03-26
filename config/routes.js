@@ -39,6 +39,12 @@ module.exports.routes = {
     validation: "updateUser",
   },
 
+  "put /api/user/add-appointment": {
+    controller: "user",
+    action: "add-appointment",
+    validation: "addAppointment",
+  },
+
   "patch /api/admin/login": {
     controller: "admin",
     action: "login",

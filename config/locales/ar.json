@@ -7,5 +7,9 @@
 	"notAuthenticate": "غير مسموح لك بالوصول الي البيانات",
 	"user_not_found": "لا يوجد مستخدم بهذه البيانات",
   "change_settings_validation": "لا يمكن تغيير مواعيد العمل مع وجود مواعيد محجوزه",
-  "duplicated_service": "هذه الخدمة موجودة بالفعل"
+  "duplicated_service": "هذه الخدمة موجودة بالفعل",
+  "max_day_appointments": "لا يمكنك حجز أكثر من 3 مواعيد في نفس اليوم!",
+  "max_service_appointments": "لا يمكنك حجز أكثر من ميعاد لنفس الخدمة في نفس اليوم!",
+  "error_happened": "حدث خطأ، يرجى إبلاغ الدعم الفني",
+  "reserved_appointment": "هذا الميعاد محجوز بالفعل"
 }

@@ -46,14 +46,8 @@ module.exports = {
     };
 
     try {
-      let foundAppointments = [];
-      const appointments = await appointmentsRef
-        .where("status", "==", "inProgress")
-        .get();
-      appointments.forEach((doc) => {
-        let data = doc.data();
-        foundAppointments.push(data);
-      });
+      const foundAppointments = await sails.helpers.findService
+        .with({ status: "inProgress" });
       // Stop admin from changing settings if there are running appointments
       /**@todo
        * According to current business if you want to
