@@ -9,7 +9,7 @@ const canUserMakeAppointment = (sameDayAppointments, serviceId) => {
   return { isAllowed: true };
 };
 
-const setSchedualedAppointments = (oldSchedualed, appointmentIndex, appointmentId, appointmentSchedualeLength, date) => {
+const setSchedualedAppointments = (oldSchedualed, appointmentIndex, appointmentId, appointmentSchedualeLength, date, serviceId) => {
   if (oldSchedualed) {
     oldSchedualed.appointments[appointmentIndex] = appointmentId;
   } else {
@@ -17,7 +17,8 @@ const setSchedualedAppointments = (oldSchedualed, appointmentIndex, appointmentI
     appointments[appointmentIndex] = appointmentId;
     oldSchedualed = {
       date,
-      appointments
+      appointments,
+      service: serviceId
     };
   }
   return db.collection("scheduledappointments").add(oldSchedualed);
@@ -88,7 +89,7 @@ module.exports = {
         const appointmentDoc = await db.collection("appointments").add(_appointmentObject);
         const scheduleAppointmentDoc = await setSchedualedAppointments(scheduledAppointmentDay,
           appointmentIndex, _appointmentObject.id,
-          appointmentSchedualeLength, _appointmentObject.date)
+          appointmentSchedualeLength, _appointmentObject.date, inputs.serviceId)
       }
 
       return this.res.successResponse({
@@ -101,4 +102,18 @@ module.exports = {
       });
     }
   },
+  /**@todo
+   * Sorry but i have no time to complete task
+   * But i can write Pseudocode for what i have in my mind
+   * I imagin a new table called scheduled appointments have
+   * { date: the date of the day,
+   * service: appointments of exact service
+   * appointments: [] "array of appointments divided into valid time slots" }
+   * when i need to make validation to a time slot
+   * i have to clac the index of it in array of appointments
+   * then trying to check if index have value or null
+   * if has value then it is reserved else its free
+   * we can set appointments index of exact service on exact day by a cloud function
+   * By the same way we can delete appointment if user deactivated
+   */
 };

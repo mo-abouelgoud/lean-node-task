@@ -7,6 +7,10 @@ module.exports = {
       type: "string",
       require: true
     },
+    serviceId: {
+      type: "string",
+      require: true
+    },
     index: {
       type: "string",
     },
@@ -23,6 +27,7 @@ module.exports = {
 
     const byDayQuerySnapshot = await sheduledAppointmentsRef
       .where("day", "==", inputs.day)
+      .where("service", "==", inputs.serviceId)
       .get();
 
     byDayQuerySnapshot.forEach((doc) => {
