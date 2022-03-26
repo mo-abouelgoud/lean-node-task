@@ -5,5 +5,7 @@
 	"mission_success": "تمت العمليه بنجاح",
 	"database_error": "هناك خطا قد حدث",
 	"notAuthenticate": "غير مسموح لك بالوصول الي البيانات",
-	"user_not_found": "user_not_found"
+	"user_not_found": "لا يوجد مستخدم بهذه البيانات",
+  "change_settings_validation": "لا يمكن تغيير مواعيد العمل مع وجود مواعيد محجوزه",
+  "duplicated_service": "هذه الخدمة موجودة بالفعل"
 }

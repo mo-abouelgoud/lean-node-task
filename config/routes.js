@@ -32,6 +32,7 @@ module.exports.routes = {
   },
 
   "get /api/users": { controller: "user", action: "show-details" },
+  "get /api/user/show-services": { controller: "user", action: "show-services" },
   "put /api/users": {
     controller: "user",
     action: "update",
@@ -49,6 +50,12 @@ module.exports.routes = {
     controller: "admin",
     action: "manage-settings",
     validation: "manageSettings",
+  },
+
+  "put /api/admin/add-service": {
+    controller: "admin",
+    action: "add-service",
+    validation: "addService",
   },
 
   "get /api/admin/get-users": {

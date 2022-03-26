@@ -8,5 +8,7 @@
   "mission_success":"the process has finished successfully",
   "database_error":"there was aproblem occured",
   "server_error":"the server returned error",
-  "user_not_found":"user not Found"
+  "user_not_found":"user not Found",
+  "change_settings_validation": "You can't change working hours while appointments in progress",
+  "duplicated_service": "This service is already exists"
 }

@@ -37,14 +37,26 @@ module.exports = {
     //create filter to the algolia index (i have to  put OR between the two filters)
     const settingsRef = db.collection("settings");
 
+    const appointmentsRef = db.collection("appointments");
+
     let _object = {
       startTime: inputs.startTime,
       endTime: inputs.endTime,
       slotTime: inputs.slotTime,
     };
 
-    //update the user new data
     try {
+      let foundAppointments = [];
+      const appointments = await appointmentsRef
+        .where("status", "==", "inProgress")
+        .get();
+      appointments.forEach((doc) => {
+        let data = doc.data();
+        foundAppointments.push(data);
+      });
+      if (foundAppointments.length) {
+        return this.res.badRequest({ message: this.req.i18n.__("change_settings_validation") });
+      }
       let updateSettings = await settingsRef
         .doc("settings")
         .set(_object, { merge: true });
