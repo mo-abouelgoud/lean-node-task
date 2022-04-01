@@ -7,10 +7,6 @@ module.exports = {
       type: "string",
       require: true
     },
-    serviceId: {
-      type: "string",
-      require: true
-    },
     index: {
       type: "string",
     },
@@ -27,7 +23,6 @@ module.exports = {
 
     const byDayQuerySnapshot = await sheduledAppointmentsRef
       .where("date", "==", inputs.date)
-      .where("service", "==", inputs.serviceId)
       .get();
 
     byDayQuerySnapshot.forEach((doc) => {
@@ -39,7 +34,7 @@ module.exports = {
     if (! sheduledAppointmentsDoc) return exits.success(null);
 
     if (inputs.index) {
-      return exits.success(sheduledAppointmentsDoc.appointments[inputs.index]);
+      return exits.success(sheduledAppointmentsDoc.appointmentsServices[inputs.index]);
     } else {
       return exits.success(sheduledAppointmentsDoc);
     }

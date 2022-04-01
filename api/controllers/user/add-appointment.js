@@ -14,19 +14,29 @@ const setSchedualedAppointments = (oldSchedualed,
     appointmentDate, appointmentTime },serviceId) => {
   if (oldSchedualed) {
     const docId = oldSchedualed.docId;
-    oldSchedualed.appointments[appointmentIndex] = { appointmentId, appointmentTime };
+    if (oldSchedualed.appointmentsServices[appointmentIndex]) {
+      oldSchedualed.appointmentsServices[appointmentIndex].appointmentsIds.push(appointmentId);
+      oldSchedualed.appointmentsServices[appointmentIndex].servicesIds.push(serviceId);
+    } else {
+      oldSchedualed.appointmentsServices[appointmentIndex] = {
+        appointmentsIds: [appointmentId],
+        servicesIds: [serviceId],
+        appointmentTime };
+    }
     delete oldSchedualed.docId;
     return db.collection("scheduledappointments")
       .doc(docId)
       .set(oldSchedualed, { merge: true });
   } else {
-    const appointments = new Array(appointmentSchedualeLength).fill(null);
-    appointments[appointmentIndex] = { appointmentId, appointmentTime };
+    const appointmentsServices = new Array(appointmentSchedualeLength).fill(null);
+    appointmentsServices[appointmentIndex] = {
+      appointmentsIds: [appointmentId],
+      servicesIds: [serviceId],
+      appointmentTime };
     oldSchedualed = {
       id: sails.helpers.randomCryptoString.with({ size: 32 }),
-      appointments,
-      date: appointmentDate,
-      service: serviceId
+      appointmentsServices,
+      date: appointmentDate
     };
     return db.collection("scheduledappointments").add(oldSchedualed);
   }
@@ -110,8 +120,10 @@ module.exports = {
       }
 
       let scheduledDayAppointments = await sails.helpers.getScheduledAppointments
-        .with({ date: inputs.date, serviceId: inputs.serviceId });
-      if (scheduledDayAppointments && scheduledDayAppointments.appointments[appointmentIndex]) {
+        .with({ date: inputs.date });
+      if (scheduledDayAppointments
+        && scheduledDayAppointments.appointmentsServices[appointmentIndex]
+        && scheduledDayAppointments.appointmentsServices[appointmentIndex].servicesIds.includes(inputs.serviceId)) {
         return this.res.validationError({
           message: this.req.i18n.__("reserved_appointment")
         });
