@@ -11,5 +11,11 @@
   "max_day_appointments": "لا يمكنك حجز أكثر من 3 مواعيد في نفس اليوم!",
   "max_service_appointments": "لا يمكنك حجز أكثر من ميعاد لنفس الخدمة في نفس اليوم!",
   "error_happened": "حدث خطأ، يرجى إبلاغ الدعم الفني",
-  "reserved_appointment": "هذا الميعاد محجوز بالفعل"
+  "reserved_appointment": "هذا الميعاد محجوز بالفعل",
+  "invalid_date_format": "صيغة الوقت غير صحيحة",
+  "appointment_time_fram_validation": "وقت الميعاد يجب أن يكون بين ساعات العمل",
+  "not_valid_time": "يجب إدخال وقت متاح حجز صحيح لكي تتمكن من حجز ميعاد",
+  "time_before_start_error": "لا يمكن إدخال ميعاد قبل موعد بدء الحجز",
+  "time_after_end_error": "لا يمكنك إدخال ميعاد بعد موعد نهاية الحجز",
+  "past_time_validation": "غير مسموح بحجز ميعاد في موعد قد مضى !"
 }

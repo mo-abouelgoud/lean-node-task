@@ -9,15 +9,17 @@ const canUserMakeAppointment = (sameDayAppointments, serviceId) => {
   return { isAllowed: true };
 };
 
-const setSchedualedAppointments = (oldSchedualed, appointmentIndex, appointmentId, appointmentSchedualeLength, date, serviceId) => {
+const setSchedualedAppointments = (oldSchedualed,
+  { appointmentIndex, appointmentId, appointmentSchedualeLength,
+    appointmentDate, appointmentTime },serviceId) => {
   if (oldSchedualed) {
-    oldSchedualed.appointments[appointmentIndex] = appointmentId;
+    oldSchedualed.appointments[appointmentIndex] = { appointmentId, appointmentTime };
   } else {
     const appointments = new Array(appointmentSchedualeLength).fill(null);
-    appointments[appointmentIndex] = appointmentId;
+    appointments[appointmentIndex] = { appointmentId, appointmentTime };
     oldSchedualed = {
-      date,
       appointments,
+      date: appointmentDate,
       service: serviceId
     };
   }
@@ -77,10 +79,32 @@ module.exports = {
         return this.res.validationError({ message: this.req.i18n.__(message) });
       }
 
-      const { appointmentIndex, appointmentSchedualeLength } = await sails.helpers.getAppointmentIndex
+      if (new Date(inputs.date).toDateString() === new Date().toDateString()) {
+        if (parseInt(inputs.time.split(':')[0]) < new Date().getHours) {
+          // not allowed to reserve a past time
+          return this.res.validationError({ message: this.req.i18n.__("past_time_validation") });
+        } else if (parseInt(inputs.time.split(':')[0]) === new Date().getHours) {
+          if (parseInt(inputs.time.split(':')[1]) < new Date().getMinutes()) {
+            // not allowed to reserve a past time
+            return this.res.validationError({ message: this.req.i18n.__("past_time_validation") });
+          }
+        }
+      }
+
+      const { appointmentIndex, appointmentSchedualeLength, errorHappened } = await sails.helpers.getAppointmentIndex
         .with({ time: inputs.time });
+
+      /**@todo
+       * Custom AppError
+       */
+      if (errorHappened) {
+        return this.res.validationError({
+          message: this.req.i18n.__(errorHappened)
+        });
+      }
+
       let scheduledAppointmentDay = await sails.helpers.getScheduledAppointments
-        .with({ day: inputs.date });
+        .with({ day: inputs.date, serviceId: inputs.serviceId });
       if (scheduledAppointmentDay && scheduledAppointmentDay.appointments[appointmentIndex]) {
         return this.res.validationError({
           message: this.req.i18n.__("reserved_appointment")
@@ -88,8 +112,9 @@ module.exports = {
       } else {
         const appointmentDoc = await db.collection("appointments").add(_appointmentObject);
         const scheduleAppointmentDoc = await setSchedualedAppointments(scheduledAppointmentDay,
-          appointmentIndex, _appointmentObject.id,
-          appointmentSchedualeLength, _appointmentObject.date, inputs.serviceId)
+          { appointmentIndex, appointmentId: _appointmentObject.id,
+            appointmentSchedualeLength, appointmentDate: _appointmentObject.date,
+            appointmentTime: _appointmentObject.time }, inputs.serviceId);
       }
 
       return this.res.successResponse({
@@ -102,18 +127,4 @@ module.exports = {
       });
     }
   },
-  /**@todo
-   * Sorry but i have no time to complete task
-   * But i can write Pseudocode for what i have in my mind
-   * I imagin a new table called scheduled appointments have
-   * { date: the date of the day,
-   * service: appointments of exact service
-   * appointments: [] "array of appointments divided into valid time slots" }
-   * when i need to make validation to a time slot
-   * i have to clac the index of it in array of appointments
-   * then trying to check if index have value or null
-   * if has value then it is reserved else its free
-   * we can set appointments index of exact service on exact day by a cloud function
-   * By the same way we can delete appointment if user deactivated
-   */
 };
