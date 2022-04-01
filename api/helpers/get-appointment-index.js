@@ -2,7 +2,7 @@
 const validateTimeInFram = (inputTime, systemTime={}, exits) => {
   const [inputTimeHours, inputTimeMinutes] = getHourseMunitesFromTime(inputTime, exits);
   if (inputTimeHours < systemTime.startTimeHours
-    || inputTimeHours > systemTime.endTimeHours) {
+    || inputTimeHours >= systemTime.endTimeHours) {
     return exits.success({errorHappened: 'appointment_time_fram_validation'});
   }
   if (inputTimeHours === systemTime.startTimeHours) {
@@ -18,7 +18,7 @@ const validateTimeInFram = (inputTime, systemTime={}, exits) => {
   }
   const diffMinutesBetweenInputAndStart = ((inputTimeHours - systemTime.startTimeHours) * 60)
       + (inputTimeMinutes - systemTime.startTimeMinutes);
-  if (diffMinutesBetweenInputAndStart < systemTime.timeSlot) {
+  if (diffMinutesBetweenInputAndStart !== 0 && diffMinutesBetweenInputAndStart < systemTime.timeSlot) {
     // Not valid time
     return exits.success({errorHappened: 'not_valid_time'});
   } else if (diffMinutesBetweenInputAndStart % systemTime.timeSlot !== 0) {

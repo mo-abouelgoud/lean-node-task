@@ -3,7 +3,7 @@ module.exports = {
   description: "get scheduled appointment",
 
   inputs: {
-    day: {
+    date: {
       type: "string",
       require: true
     },
@@ -26,7 +26,7 @@ module.exports = {
     const sheduledAppointmentsRef = db.collection("scheduledappointments");
 
     const byDayQuerySnapshot = await sheduledAppointmentsRef
-      .where("day", "==", inputs.day)
+      .where("date", "==", inputs.date)
       .where("service", "==", inputs.serviceId)
       .get();
 
@@ -41,7 +41,7 @@ module.exports = {
     if (inputs.index) {
       return exits.success(sheduledAppointmentsDoc.appointments[inputs.index]);
     } else {
-      return exits.success(sheduledAppointmentsDoc.appointments);
+      return exits.success(sheduledAppointmentsDoc);
     }
   },
 };

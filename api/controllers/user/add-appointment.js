@@ -13,17 +13,23 @@ const setSchedualedAppointments = (oldSchedualed,
   { appointmentIndex, appointmentId, appointmentSchedualeLength,
     appointmentDate, appointmentTime },serviceId) => {
   if (oldSchedualed) {
+    const docId = oldSchedualed.docId;
     oldSchedualed.appointments[appointmentIndex] = { appointmentId, appointmentTime };
+    delete oldSchedualed.docId;
+    return db.collection("scheduledappointments")
+      .doc(docId)
+      .set(oldSchedualed, { merge: true });
   } else {
     const appointments = new Array(appointmentSchedualeLength).fill(null);
     appointments[appointmentIndex] = { appointmentId, appointmentTime };
     oldSchedualed = {
+      id: sails.helpers.randomCryptoString.with({ size: 32 }),
       appointments,
       date: appointmentDate,
       service: serviceId
     };
+    return db.collection("scheduledappointments").add(oldSchedualed);
   }
-  return db.collection("scheduledappointments").add(oldSchedualed);
 };
 
 module.exports = {
@@ -80,10 +86,10 @@ module.exports = {
       }
 
       if (new Date(inputs.date).toDateString() === new Date().toDateString()) {
-        if (parseInt(inputs.time.split(':')[0]) < new Date().getHours) {
+        if (parseInt(inputs.time.split(':')[0]) < new Date().getHours()) {
           // not allowed to reserve a past time
           return this.res.validationError({ message: this.req.i18n.__("past_time_validation") });
-        } else if (parseInt(inputs.time.split(':')[0]) === new Date().getHours) {
+        } else if (parseInt(inputs.time.split(':')[0]) === new Date().getHours()) {
           if (parseInt(inputs.time.split(':')[1]) < new Date().getMinutes()) {
             // not allowed to reserve a past time
             return this.res.validationError({ message: this.req.i18n.__("past_time_validation") });
@@ -103,15 +109,15 @@ module.exports = {
         });
       }
 
-      let scheduledAppointmentDay = await sails.helpers.getScheduledAppointments
-        .with({ day: inputs.date, serviceId: inputs.serviceId });
-      if (scheduledAppointmentDay && scheduledAppointmentDay.appointments[appointmentIndex]) {
+      let scheduledDayAppointments = await sails.helpers.getScheduledAppointments
+        .with({ date: inputs.date, serviceId: inputs.serviceId });
+      if (scheduledDayAppointments && scheduledDayAppointments.appointments[appointmentIndex]) {
         return this.res.validationError({
           message: this.req.i18n.__("reserved_appointment")
         });
       } else {
         const appointmentDoc = await db.collection("appointments").add(_appointmentObject);
-        const scheduleAppointmentDoc = await setSchedualedAppointments(scheduledAppointmentDay,
+        const scheduleAppointmentDoc = await setSchedualedAppointments(scheduledDayAppointments,
           { appointmentIndex, appointmentId: _appointmentObject.id,
             appointmentSchedualeLength, appointmentDate: _appointmentObject.date,
             appointmentTime: _appointmentObject.time }, inputs.serviceId);
