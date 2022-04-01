@@ -10,6 +10,7 @@ module.exports.policies = {
     "show-details": ["setLocale", "isAuthenticated", "isNormalUser"],
     "show-services": ["setLocale", "isAuthenticated", "isNormalUser"],
     "add-appointment": ["setLocale", "isAuthenticated", "inputValidation", "isNormalUser"],
+    "nearest-free-appointments": ["setLocale", "isAuthenticated", "isNormalUser"],
     update: ["setLocale", "isAuthenticated", "inputValidation", "isNormalUser"],
   },
 
