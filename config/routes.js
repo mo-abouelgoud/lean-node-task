@@ -31,9 +31,9 @@ module.exports.routes = {
     validation: "login",
   },
 
-  "get /api/users": { controller: "user", action: "show-details" },
   "get /api/user/show-services": { controller: "user", action: "show-services" },
   "get /api/user/nearest-free-appointments": { controller: "user", action: "nearest-free-appointments" },
+  "get /api/users": { controller: "user", action: "show-details" },
   "put /api/users": {
     controller: "user",
     action: "update",

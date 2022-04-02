@@ -53,7 +53,7 @@ module.exports = {
       });
     } else if (inputs.userId) {
       const byUserIdQuerySnapshot = await appointmentsRef
-        .where("userId", "==", inputs.userId)
+        .where("user", "==", inputs.userId)
         .get();
 
       byUserIdQuerySnapshot.forEach((doc) => {
